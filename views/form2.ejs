@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h3>Programme and Faculty Details</h3>
+    <form id="tabularForm">
+        <table border="1" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th rowspan="3">Sr No</th>
+                    <th rowspan="3">Name of Course</th>
+                    <th colspan="2">Students Enrolled in all years</th>
+                    <th colspan="6">Faculty Status</th>
+                    <th rowspan="3">Guest teacher working</th>
+                    <th rowspan="3">Vocational Teachers working</th>
+                </tr>
+                <tr>
+                    <th>Degree Level</th>
+                    <th>Enrolled Students</th>
+                    <th colspan="2">Assistant Professor</th>
+                    <th colspan="2">Associate Professor</th>
+                    <th colspan="2">Professor</th>
+                </tr>
+                <tr>
+                    <th>Dropdown Ug/Pg</th>
+                    <th></th>
+                    <th>Sanctioned</th>
+                    <th>Working</th>
+                    <th>Sanctioned</th>
+                    <th>Working</th>
+                    <th>Sanctioned</th>
+                    <th>Working</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <td><input type="text" name="SrNo"></td>
+                    <td><input type="text" name="NameOfCourse"></td>
+                    <td><select name="UgPg" id="Ug/Pg">
+                            <option value="Ug">Ug</option>
+                            <option value="Pg">Pg</option>
+                        </select></td>
+                    <td><input type="text" name="EnrolledStudents"></td>
+                    <td><input type="text" name="Sanctioned1"></td>
+                    <td><input type="text" name="Working1"></td>
+                    <td><input type="text" name="Sanctioned2"></td>
+                    <td><input type="text" name="Working2"></td>
+                    <td><input type="text" name="Sanctioned3"></td>
+                    <td><input type="text" name="Working3"></td>
+                    <td><input type="text" name="GuestTeacher"></td>
+                    <td><input type="text" name="VocationalTeacher"></td>
+                </tr>
+            </tbody>
+        </table>
+        <Button type="button" onclick="AddRow()">Add Row</Button>
+        <!-- <button type="submit">Submit</button> -->
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+    <script>
+        function AddRow() {
+            let tbody = document.getElementById("tbody");
+            const row = tbody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            const cell4 = row.insertCell(3);
+            const cell5 = row.insertCell(4);
+            const cell6 = row.insertCell(5);
+            const cell7 = row.insertCell(6);
+            const cell8 = row.insertCell(7);
+            const cell9 = row.insertCell(8);
+            const cell10 = row.insertCell(9);
+            const cell11= row.insertCell(10);
+            const cell12= row.insertCell(11);
+            cell1.innerHTML = '<input type="text" name="SrNo">';
+            cell2.innerHTML = '<input type="text" name="NameOfCourse">';
+            cell3.innerHTML = '<select name="UgPg" id="Ug/Pg"> <option value="Ug">Ug</option> <option value="Pg">Pg</option></select>';
+                cell4.innerHTML = '<input type="text" name="EnrolledStudents">';
+                cell5.innerHTML = '<input type="text" name="Sanctioned1">';
+                cell6.innerHTML = '<input type="text" name="Working1">';
+                cell7.innerHTML = '<input type="text" name="Sanctioned2">';
+                cell8.innerHTML = '<input type="text" name="Working2">';
+                cell9.innerHTML = '<input type="text" name="Sanctioned3">';
+                cell10.innerHTML = '<input type="text" name="Working3">';
+                cell11.innerHTML = '<input type="text" name="GuestTeacher">';
+                cell12.innerHTML = '<input type="text" name="VocationalTeacher">';
+        }
+
+        function submitForm() {
+            // const formData = new FormData(event.target);
+            const data = [];
+
+            // Convert form data into an array of objects
+            const rows = document.querySelectorAll("#tbody tr");
+            
+            rows.forEach((row) => {
+                const inputs = row.querySelectorAll("input, select, textarea");
+                const rowData = {};
+
+                // Iterate over the form fields and collect data
+                inputs.forEach(input => {
+                    rowData[input.name] = input.value;
+                });
+
+                // Push the row data to the data array
+                data.push(rowData);
+            });
+            console.log(data)
+            fetch('/v1/form2', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+
+</html>
+  

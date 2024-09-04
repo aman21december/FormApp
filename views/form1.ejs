@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Information</title>
+</head>
+<body>
+    <h3>
+        A: Basic Details
+    </h3>
+
+    <form action="/v1/basicInformation" method="post">
+        <label for="AISHECODE">1: AISHECODE:</label>
+        <input type="text" id="AISHECODE" name="AISHECODE"><br>
+        <label for="NameOfInstitution">2: Name Of Institution:</label>
+        <input type="text" id="NameOfInstitution" name="NameOfInstitution">
+        <label for="YearOfEstablishment">3: Year Of Establishment:</label>
+        <input type="text" id="YearOfEstablishment" name="YearOfEstablishment">
+        <h4>Affilation Details:</h4>
+        <label for="NameOfTheUniversity">4: Name Of The University:</label>
+        <input type="text" id="NameOfTheUniversity" name="NameOfTheUniversity">
+        <fieldset>
+            <legend>5: Whether the institution is exclusively meant for students from one gender</legend>
+            <input type="radio" id="Yes, only for girls" name="gender" value="Yes, only for girls">
+            <label for="Yes, only for girls">Yes, only for girls</label>
+            <input type="radio" id="Yes, only for boys" name="gender" value="Yes, only for boys">
+            <label for="Yes, only for boys">Yes, only for boys</label>
+            <input type="radio" id="for both gender" name="gender" value="for both gender">
+            <label for="for both gender">for both gender</label>
+        </fieldset>
+        <fieldset>
+            <legend>6: Whether the institution has NAAC status):</legend>
+            <input type="radio" id="Yes" name="NAACStatus" value="yes">
+            <label for="Yes">Yes</label>
+            <input type="radio" id="No" name="NAACStatus" value="no">
+            <label for="No">No</label>
+            <label for="In case yes please give grading details">&emsp; In case yes please give grading details</label>
+            <input type="text" id="In case yes please give grading details" name="GradingDetails">
+        </fieldset>   
+        <input type="submit" value="submit">
+    </form>
+    <h3>B: Officers Details</h3>
+    <form action="/v1/officersDetails" method="post">
+        <label for="ViceChancellor">(i) Name of Vice Chancellor/Principal</label>
+        <input type="text" id="ViceChancellor" name="ViceChancellor"><br>
+        <fieldset>
+            <legend>(ii) In case of College Full Time Principal</legend>
+            <input type="radio" id="Yes" name="FULLTIMEPRINCIPAL" value="Yes">
+            <label for="Yes">Yes</label>
+            <input type="radio" id="No" name="FULLTIMEPRINCIPAL" value="No">
+            <label for="No">No</label>
+        </fieldset>
+        <label for="CollegeEmail">(iii) College Email</label>
+        <input type="email" id="CollegeEmail" name="email"> <br>
+        <label for="CollegeHeadEmail">(iv) Head of Institution Email Id</label>
+        <input type="email" id="CollegeHeadEmail" name="CollegeHeadEmail"><br> 
+        <label for="Mobile">(v) Mobile Number</label>
+        <input type="tel" id="Mobile" name="Mobile"><br>
+        <label for="Telephone">(vi) Telephone Number(WIthSTDCode)</label>
+        <input type="tel" id="Telephone" name="Telephone"><br>
+        <input type="submit" value="submit">
+    </form>
+    <h3>C: Address</h3>
+    <form action="/v1/address" method="post">
+        <fieldset>
+            <legend>Location of the Institution</legend>
+            <input type="radio" name="Location" id="urban" value="urban">
+            <label for="urban">urban</label>
+            <input type="radio" name="Location" id="rural" value="rural">
+            <label for="rural">rural</label>
+        </fieldset>
+        <label for="AddressLine1">AddressLine1</label>
+        <input type="text" id="AddressLine1" name="AddressLine1"><br>
+        <label for="AddressLine2">AddressLine2</label>
+        <input type="text" id="AddressLine2" name="AddressLine2"><br>
+        <label for="LocalityCityTownVillage">LocalityCityTownVillage</label>
+        <input type="text" id="LocalityCityTownVillage" name="LocalityCityTownVillage"><br>
+        <label for="State">State</label>
+        <input type="text" id="State" name="State"><br>
+        <label for="District">District</label>
+        <input type="text" id="District" name="District"><br>
+        <label for="Country">Country</label>
+        <input type="text" id="Country" name="Country"><br>
+        
+        <label for="UrbanLocalBody">UrbanLocalBody</label>
+        <input type="text" id="UrbanLocalBody" name="UrbanLocalBody"><br>
+        <label for="PinCode">PinCode</label>
+        <input type="text" id="PinCode" name="PinCode"><br>
+        <label for="TotalAreaInAcre">TotalArea[InAcre]</label>
+        <input type="text" id="TotalAreaInAcre" name="TotalAreaInAcre"><br>
+        <label for="TotalConstructedArea[Insqm]">TotalConstructedArea[InSqm]</label>
+        <input type="text" id="TotalConstructedArea[Insqm]" name="TotalConstructedArea"><br>
+        <label for="Website">Website</label>
+        <input type="text" id="Website" name="Website"><br>
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>
