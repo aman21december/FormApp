@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <H3>New Proposal</H3>
+    <h4>Infra Construction</h4>
+    <h5>Institution proposed Infrastructure construction work list dowm in priority:</h5>
+    <form  id="tabularform1">
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Description of Infrastructure</th>
+                <th>Purpose of Infrastructure</th>
+                <th>Proposed Area Sq feet</th>
+                <th>Total cost per Sq feet</th>
+                <th>Total cost</th>
+                <th>Total amount in internal Source</th>
+                <th>Justification why it cant be done by internal source</th>
+            </tr>
+        </thead>
+        <tbody id="tbody1">
+            <tr>
+                <td><input type="text" name="SNO"></td>
+                <td><input type="text" name="DescriptionOfInfrastructure"></td>
+                <td><input type="text" name="PurposeOfInfrastructure"></td>
+                <td><input type="text" name="ProposedAreaSqFeet"></td>
+                <td><input type="text" name="TotalCostPerSqFeet"></td>
+                <td><input type="text" name="TotalCost"></td>
+                <td><input type="text" name="TotalAmountInInternalSource"></td>
+               <td><input type="text" name="JustificationWhyItCantBeDoneByInternalSource"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" onclick="AddRow1()" >Add Row</button>
+    <button type="button" onclick="SubmitForm1()" >Submit</button>
+</form>
+
+    <h3>Infra Renovation</h3>
+    <h4>Institution Proposed Infrastructure Renovation/Upgradation work list down in priority.</h4>
+    <form id="tabularform2">
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Description of Infrastructure</th>
+                <th>Detail of renovation/upgradation proposed</th>
+                <th>Proposed Area Sq feet</th>
+                <th>Total cost per Sq feet</th>
+                <th>Total cost</th>
+                <th>Total amount in internal Source</th>
+                <th>Justification why it cant be done by internal source</th>
+            </tr>
+        </thead>
+        <tbody id="tbody2">
+            <tr>
+                <td><input type="text" name="SNO"></td>
+                <td><input type="text" name="DescriptionOfInfrastructure"></td>
+                <td><input type="text" name="DetailOfRenovationUpgradationProposed"></td>
+                <td><input type="text" name="ProposedAreaSqFeet"></td>
+                <td><input type="text" name="TotalCostPerSqFeet"></td>
+                <td><input type="text" name="TotalCost"></td>
+                <td><input type="text" name="TotalAmountInInternalSource"></td>
+               <td><input type="text" name="JustificationWhyItCantBeDoneByInternalSource"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" onclick="AddRow2()">AddRow</button>
+    <button type="button" onclick="SubmitForm2()">Submit</button>
+</form>
+<script>
+    function AddRow1(){
+       let tbody=document.getElementById("tbody1")
+            const row= tbody.insertRow()
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            const cell4 = row.insertCell(3);
+            const cell5 = row.insertCell(4);
+            const cell6 = row.insertCell(5);
+            const cell7 = row.insertCell(6);
+            const cell8 = row.insertCell(7); 
+            cell1.innerHTML='<input type="text" name="SNO">'
+            cell2.innerHTML='<input type="text" name="DescriptionOfInfrastructure">'
+            cell3.innerHTML='<input type="text" name="PurposeOfInfrastructure">'
+            cell4.innerHTML='<input type="text" name="ProposedAreaSqFeet">'
+            cell5.innerHTML='<input type="text" name="TotalCostPerSqFeet">'
+            cell6.innerHTML='<input type="text" name="TotalCost">'
+            cell7.innerHTML='<input type="text" name="TotalAmountInInternalSource">'
+            cell8.innerHTML='<input type="text" name="JustificationWhyItCantBeDoneByInternalSource">'
+    }
+    function AddRow2(){
+       let tbody=document.getElementById("tbody2")
+            const row= tbody.insertRow()
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            const cell4 = row.insertCell(3);
+            const cell5 = row.insertCell(4);
+            const cell6 = row.insertCell(5);
+            const cell7 = row.insertCell(6);
+            const cell8 = row.insertCell(7); 
+            cell1.innerHTML='<input type="text" name="SNO">'
+            cell2.innerHTML='<input type="text" name="DescriptionOfInfrastructure">'
+            cell3.innerHTML='<input type="text" name="DetailOfRenovationUpgradationProposed">'
+            cell4.innerHTML='<input type="text" name="ProposedAreaSqFeet">'
+            cell5.innerHTML='<input type="text" name="TotalCostPerSqFeet">'
+            cell6.innerHTML='<input type="text" name="TotalCost">'
+            cell7.innerHTML='<input type="text" name="TotalAmountInInternalSource">'
+            cell8.innerHTML='<input type="text" name="JustificationWhyItCantBeDoneByInternalSource">'
+    }
+    function SubmitForm1(){
+        const data = [];
+        const rows = document.querySelectorAll("#tbody1 tr");
+            rows.forEach((row) => {
+                const inputs = row.querySelectorAll("input, select, textarea");
+                const rowData = {};
+
+                inputs.forEach(input => {
+                    rowData[input.name] = input.value;
+                });
+
+            
+                data.push(rowData);
+            });
+            console.log(data)
+            fetch('/v1/form6/infraConstruction', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+    function SubmitForm2(){
+        const data = [];
+        const rows = document.querySelectorAll("#tbody2 tr");
+            rows.forEach((row) => {
+                const inputs = row.querySelectorAll("input, select, textarea");
+                const rowData = {};
+
+                inputs.forEach(input => {
+                    rowData[input.name] = input.value;
+                });
+
+            
+                data.push(rowData);
+            });
+            console.log(data)
+            fetch('/v1/form6/infraRenovation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+</body>
+</html>

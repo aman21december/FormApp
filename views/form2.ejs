@@ -94,22 +94,21 @@
         }
 
         function submitForm() {
-            // const formData = new FormData(event.target);
+           
             const data = [];
 
-            // Convert form data into an array of objects
             const rows = document.querySelectorAll("#tbody tr");
             
             rows.forEach((row) => {
                 const inputs = row.querySelectorAll("input, select, textarea");
                 const rowData = {};
 
-                // Iterate over the form fields and collect data
+                
                 inputs.forEach(input => {
                     rowData[input.name] = input.value;
                 });
 
-                // Push the row data to the data array
+                
                 data.push(rowData);
             });
             console.log(data)
