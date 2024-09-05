@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 4</title>
+</head>
+<body>
+<h3>Financial Information</h3>
+<form id="financialForm">
+    <table border="1" cellspacing="0" cellpadding="0.5">
+        <thead>
+            <tr>
+                <td colspan="3">Income</td>
+                <td colspan="2">Expenditure</td>
+            </tr>
+            <tr>
+                <td>S.No</td>
+                <td>Items</td>
+                <td>Amount in absolute Rs</td>
+                <td>Expenditure Head</td>
+                <td>Amount in absolute Rs</td>
+            </tr>
+        </thead>
+        <tbody id="tobody">
+            <tr>
+                <td>1</td>
+                <td>Internal Source</td>
+                <td></td>       
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>(i)</td>
+                <td>Tuition Fee and other fee</td>
+                <td><input type="text" name="tuition_fee"></td>
+                <td><input type="text" name="tuition_expenditure"></td>
+                <td><input type="text" name="tuition_expenditure_amount"></td>
+            </tr>
+            <tr>
+                <td>(ii)</td>
+                <td>Examination Fee</td>
+                <td><input type="text" name="exam_fee"></td>
+                <td><input type="text" name="exam_expenditure"></td>
+                <td><input type="text" name="exam_expenditure_amount"></td>
+            </tr>
+            <tr>
+                <td>(ii)</td>
+                <td>Donations</td>
+                <td><input type="text" name="donations"></td>
+                <td><input type="text" name="donations_expenditure"></td>
+                <td><input type="text" name="donations_expenditure_amount"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Deveopment Grant received from state government</td>
+                <td><input type="text" name="dev_grant"></td>
+                <td><input type="text" name="dev_grant_expenditure"></td>
+                <td><input type="text" name="dev_grant_expenditure_amount"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Grant received from university (In case of college)</td>
+                <td><input type="text" name="uni_grant"></td>
+                <td><input type="text" name="uni_grant_expenditure"></td>
+                <td><input type="text" name="uni_grant_expenditure_amount"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+<script>
+     document.getElementById('financialForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            
+            const data = Object.fromEntries(formData.entries());
+            console.log(data)
+            fetch('/v1/form4', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });;
+        });
+</script>
+</body>
+</html>
