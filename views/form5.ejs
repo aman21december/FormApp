@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Infrastructure STATUS</h2>
+    <h3>A. Academic & Administrative Building (Infrastructure Details)</h3>
+    <form id="InfrastructureStatus">
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Sl. No.</th>
+            <th>Parameters</th>
+            <th>Available (Y/N)</th>
+            <th>Specify the Number</th>
+            <th>Total Capacity</th>
+            <th>Year of Construction (approx. years)</th>
+            <th>Is it functional or dysfunctional?</th>
+            <th>Does it need renovation or new construction?</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <td>1</td>
+            <td>Auditorium</td>
+            <td><select name="AuditoriumAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="AuditoriumSpecifyTheNumber"></td>
+            <td><input type="text" name="AuditoriumTotalCapacity"></td>
+            <td><input type="text" name="AuditoriumYearOfConstruction"></td>
+            <td><input type="text" name="AuditoriumFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="AuditoriumRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Seminar Hall</td>
+            <td><select name="SeminarHallAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="SeminarHallSpecifyTheNumber"></td>
+            <td><input type="text" name="SeminarHallTotalCapacity"></td>
+            <td><input type="text" name="SeminarHallYearOfConstruction"></td>
+            <td><input type="text" name="SeminarHallFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="SeminarHallRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Classrooms</td>
+            <td><select name="ClassroomsHallAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ClassroomsSpecifyTheNumber"></td>
+            <td><input type="text" name="ClassroomsTotalCapacity"></td>
+            <td><input type="text" name="ClassroomsYearOfConstruction"></td>
+            <td><input type="text" name="ClassroomsFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="ClassroomsRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Classrooms with Projector</td>
+            <td><select name="ClassroomsWithProjectorHallAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ClassroomsWithProjectorSpecifyTheNumber"></td>
+            <td>NA</td>
+            <td>NA</td>
+            <td><input type="text" name="ClassroomsWithProjectorFunctionalOrDysfunctional"></td>
+            <td>NA</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Smart Classrooms</td>
+            <td><select name="SmartClassroomsAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="SmartClassroomsSpecifyTheNumber"></td>
+            <td><input type="text" name="SmartClassroomsTotalCapacity"></td>
+            <td>NA</td>
+            <td><input type="text" name="SmartClassroomsFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="SmartClassroomsRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>No of Projects</td>
+            <td><select name="ProjectsAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ProjectsSpecifyTheNumber"></td>
+            <td><input type="text" name="ProjectsTotalCapacity"></td>
+            <td>NA</td>
+            <td><input type="text" name="ProjectsFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="ProjectsRenovationOrConstruction"></td> 
+         </tr>
+          <tr>
+            <td>7</td>
+            <td>No of Interactive Flat Panel</td>
+            <td><select name="FlatPanelAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="FlatPanelSpecifyTheNumber"></td>
+            <td>Na</td>
+            <td>NA</td>
+            <td><input type="text" name="FlatPanelFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="FlatPanelRenovationOrConstruction"></td>          </tr>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Drinking water facility</td>
+            <td><select name="DrinkingWaterFacilityAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="DrinkingWaterFacilitySpecifyTheNumber"></td>
+            <td><input type="text" name="DrinkingWaterFacilityTotalCapacity"></td>
+            <td>NA</td>
+            <td><input type="text" name="DrinkingWaterFacilityFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="DrinkingWaterFacilityRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Computer Lab</td>
+            <td><select name="ComputerLabAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ComputerLabSpecifyTheNumber"></td>
+            <td><input type="text" name="ComputerLabTotalCapacity"></td>
+            <td><input type="text" name="ComputerLabYearOfConstruction"></td>
+            <td><input type="text" name="ComputerLabFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="ComputerLabRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>No of Computer in Computer Lab</td>
+            <td><select name="ComputerLabAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="NoOfComputerLabSpecifyTheNumber"></td>
+            <td><input type="text" name="NoOfComputerLabTotalCapacity"></td>
+            <td><input type="text" name="NoOfComputerLabYearOfConstruction"></td>
+            <td><input type="text" name="NoOfComputerLabFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="NoOfComputerLabRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Library</td>
+            <td><select name="LibraryAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="LibrarySpecifyTheNumber"></td>
+            <td><input type="text" name="LibraryTotalCapacity"></td>
+            <td><input type="text" name="LibraryYearOfConstruction"></td>
+            <td><input type="text" name="LibraryFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="LibraryRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Hostel for Boys</td>
+            <td><select name="BoysHostel"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="BoysHostelSpecifyTheNumber"></td>
+            <td><input type="text" name="BoysHostelTotalCapacity"></td>
+            <td><input type="text" name="BoysHostelYearOfConstruction"></td>
+            <td><input type="text" name="BoysHostelFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="BoysHostelRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Hostel for Girls</td>
+            <td><select name="GirlsHostel"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="GirlsHostelSpecifyTheNumber"></td>
+            <td><input type="text" name="GirlsHostelTotalCapacity"></td>
+            <td><input type="text" name="GirlsHostelYearOfConstruction"></td>
+            <td><input type="text" name="GirlsHostelFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="GirlsHostelRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Reading Room</td>
+            <td><select name="ReadingRoom"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ReadingRoomSpecifyTheNumber"></td>
+            <td><input type="text" name="ReadingRoomTotalCapacity"></td>
+            <td><input type="text" name="ReadingRoomYearOfConstruction"></td>
+            <td><input type="text" name="ReadingRoomFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="ReadingRoomRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td>Common Room</td>
+            <td><select name="CommonRoom"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="CommonRoomSpecifyTheNumber"></td>
+            <td><input type="text" name="CommonRoomTotalCapacity"></td>
+            <td><input type="text" name="CommonRoomYearOfConstruction"></td>
+            <td><input type="text" name="CommonRoomFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="CommonRoomRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>
+              Laboratory <br>
+              Physics Lab
+            </td>
+            <td><select name="PhysicsLab"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="PhysicsLabSpecifyTheNumber"></td>
+            <td><input type="text" name="PhysicsLabTotalCapacity"></td>
+            <td><input type="text" name="PhysicsLabYearOfConstruction"></td>
+            <td><input type="text" name="PhysicsLabFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="PhysicsLabRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              Zoology Lab
+            </td>
+              <td><select name="ZoologyLab"><option value="yes">Yes</option><option value="no">No</option></select></td>
+              <td><input type="text" name="ZoologyLabSpecifyTheNumber"></td>
+              <td><input type="text" name="ZoologyLabTotalCapacity"></td>
+              <td><input type="text" name="ZoologyLabYearOfConstruction"></td>
+              <td><input type="text" name="ZoologyLabFunctionalOrDysfunctional"></td>
+              <td><input type="text" name="ZoologyLabRenovationOrConstruction"></td>  
+          </tr>
+          <tr>
+            <td></td>
+            <td> 
+              Botany Lab
+            </td>
+            <td><select name="BotanyLab"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="BotanyLabSpecifyTheNumber"></td>
+            <td><input type="text" name="BotanyLabTotalCapacity"></td>
+            <td><input type="text" name="BotanyLabYearOfConstruction"></td>
+            <td><input type="text" name="BotanyLabFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="BotanyLabRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              Botanical Garden
+            </td>
+            <td><select name="BotanicalGarden"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="BotanicalGardenSpecifyTheNumber"></td>
+            <td><input type="text" name="BotanicalGardenTotalCapacity"></td>
+            <td><input type="text" name="BotanicalGardenYearOfConstruction"></td>
+            <td><input type="text" name="BotanicalGardenFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="BotanicalGardenRenovationOrConstruction"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              Psychology
+            </td>
+            <td><select name="Psychology"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="PsychologySpecifyTheNumber"></td>
+            <td><input type="text" name="PsychologyTotalCapacity"></td>
+            <td><input type="text" name="PsychologyYearOfConstruction"></td>
+            <td><input type="text" name="PsychologyFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="PsychologyRenovationOrConstruction"></td>     
+            </tr>
+          <tr>
+            <td></td>
+            <td>
+             Geogrophy
+            </td>
+            <td><select name="Geogrophy"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="GeogrophySpecifyTheNumber"></td>
+            <td><input type="text" name="GeogrophyTotalCapacity"></td>
+            <td><input type="text" name="GeogrophyYearOfConstruction"></td>
+            <td><input type="text" name="GeogrophyFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="GeogrophyRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              HomeScience
+            </td>
+            <td><select name="HomeScience"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="HomeScienceSpecifyTheNumber"></td>
+            <td><input type="text" name="HomeScienceTotalCapacity"></td>
+            <td><input type="text" name="HomeScienceYearOfConstruction"></td>
+            <td><input type="text" name="HomeScienceFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="HomeScienceRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>17</td>
+            <td>Language Lab/Virtual Lab</td>
+            <td><select name="LanguageLab"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="LanguageLabSpecifyTheNumber"></td>
+            <td><input type="text" name="LanguageLabTotalCapacity"></td>
+            <td><input type="text" name="LanguageLabYearOfConstruction"></td>
+            <td><input type="text" name="LanguageLabFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="LanguageLabRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>18</td>
+            <td>Canteen/Cafeteria</td>
+            <td><select name="Canteen"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="CanteenSpecifyTheNumber"></td>
+            <td><input type="text" name="CanteenTotalCapacity"></td>
+            <td><input type="text" name="CanteenYearOfConstruction"></td>
+            <td><input type="text" name="CanteenFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="CanteenRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>19</td>
+            <td>Basic Health Care Facility</td>
+            <td><select name="HealthCare"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="HealthCareSpecifyTheNumber"></td>
+            <td><input type="text" name="HealthCareTotalCapacity"></td>
+            <td><input type="text" name="HealthCareYearOfConstruction"></td>
+            <td><input type="text" name="HealthCareFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="HealthCareRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>20</td>
+            <td>Media/Print Production/Reprography</td>
+            <td><select name="Media"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="MediaSpecifyTheNumber"></td>
+            <td>NA</td>
+            <td><input type="text" name="MediaYearOfConstruction"></td>
+            <td><input type="text" name="MediaFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="MediaRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>21</td>
+            <td>Professors Cabin</td>
+            <td><select name="ProfessorsCabin"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ProfessorsCabinSpecifyTheNumber"></td>
+            <td><input type="text" name="ProfessorsCabinTotalCapacity"></td>
+            <td><input type="text" name="ProfessorsCabinYearOfConstruction"></td>
+            <td><input type="text" name="ProfessorsCabinFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="ProfessorsCabinRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>22</td>
+            <td>Teachers Room</td>
+            <td><select name="TeachersRoom"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="TeachersRoomSpecifyTheNumber"></td>
+            <td><input type="text" name="TeachersRoomTotalCapacity"></td>
+            <td><input type="text" name="TeachersRoomYearOfConstruction"></td>
+            <td><input type="text" name="TeachersRoomFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="TeachersRoomRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>23</td>
+            <td>Residence for Teaching Staff</td>
+            <td><select name="ResidenceTeachingStaff"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ResidenceTeachingStaffSpecifyTheNumber"></td>
+            <td><input type="text" name="ResidenceTeachingStaffTotalCapacity"></td>
+            <td><input type="text" name="ResidenceTeachingStaffYearOfConstruction"></td>
+            <td><input type="text" name="ResidenceTeachingStaffFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="ResidenceTeachingStaffRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>24</td>
+            <td>Residence for Non Teaching Staff</td>
+            <td><select name="ResidenceNonTeachingStaff"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ResidenceNonTeachingStaffSpecifyTheNumber"></td>
+            <td><input type="text" name="ResidenceNonTeachingStaffTotalCapacity"></td>
+            <td><input type="text" name="ResidenceNonTeachingStaffYearOfConstruction"></td>
+            <td><input type="text" name="ResidenceNonTeachingStaffFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="ResidenceNonTeachingStaffRenovationOrConstruction"></td>  
+          </tr>
+          <tr>
+            <td>25</td>
+            <td>Computer Centre</td>
+            <td><select name="ComputerCentre"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="ComputerCentreSpecifyTheNumber"></td>
+            <td>NA</td>
+            <td><input type="text" name="ComputerCentreYearOfConstruction"></td>
+            <td><input type="text" name="ComputerCentreFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="ComputerCentreRenovationOrConstruction"></td>  
+          </tr>
+          <tr>
+            <td>26</td>
+            <td>Counseling/Guidance Services Room</td>
+            <td><select name="Counseling"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="CounselingSpecifyTheNumber"></td>
+            <td><input type="text" name="CounselingTotalCapacity"></td>
+            <td><input type="text" name="CounselingYearOfConstruction"></td>
+            <td><input type="text" name="CounselingFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="CounselingRenovationOrConstruction"></td>     
+          </tr>
+          <tr>
+            <td>27</td>
+            <td>NSS/NCC Room</td>
+            <td><select name="Nss"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="NssSpecifyTheNumber"></td>
+            <td><input type="text" name="NssTotalCapacity"></td>
+            <td><input type="text" name="NssYearOfConstruction"></td>
+            <td><input type="text" name="NssFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="NssRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>28</td>
+            <td>Gymnasium and Yoga facilities</td>
+            <td><select name="Yoga"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="YogaSpecifyTheNumber"></td>
+            <td><input type="text" name="YogaTotalCapacity"></td>
+            <td><input type="text" name="YogaYearOfConstruction"></td>
+            <td><input type="text" name="YogaFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="YogaRenovationOrConstruction"></td>   
+          </tr>
+          <tr>
+            <td>29</td>
+            <td>Skill Development Centre</td>
+            <td><select name="SkillCentre"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="SkillCentreSpecifyTheNumber"></td>
+            <td><input type="text" name="SkillCentreTotalCapacity"></td>
+            <td><input type="text" name="SkillCentreYearOfConstruction"></td>
+            <td><input type="text" name="SkillCentreFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="SkillCentreRenovationOrConstruction"></td> 
+          </tr>
+          <tr>
+            <td>30</td>
+            <td>Playground</td>
+            <td><select name="Playground"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="PlaygroundSpecifyTheNumber"></td>
+            <td>Na</td>
+            <td>Na</td>
+            <td><input type="text" name="PlaygroundFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="PlaygroundRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>31</td>
+            <td>Indoor Games Facility</td>
+            <td><select name="Indoor"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="IndoorSpecifyTheNumber"></td>
+            <td>Na</td>
+            <td>Na</td>
+            <td><input type="text" name="IndoorFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="IndoorRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>32</td>
+            <td>CCTV Monitoring</td>
+            <td><select name="CCTVMonitoring"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="CCTVMonitoringSpecifyTheNumber"></td>
+            <td>Na</td>
+            <td>Na</td>
+            <td><input type="text" name="CCTVMonitoringFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="CCTVMonitoringRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>33</td>
+            <td>Wi-Fi/Lan network in the campus</td>
+            <td><select name="Wifi"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="WifiSpecifyTheNumber"></td>
+            <td>Na</td>
+            <td>Na</td>
+            <td><input type="text" name="WifiFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="WifiRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>34</td>
+            <td>Guest House</td>
+            <td><select name="GuestHouse"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="GuestHouseSpecifyTheNumber"></td>
+            <td><input type="text" name="GuestHouseTotalCapacity"></td>
+            <td><input type="text" name="GuestHouseYearOfConstruction"></td>
+            <td><input type="text" name="GuestHouseFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="GuestHouseRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>35</td>
+            <td>Boundary Wall</td>
+            <td><select name="BoundaryWall"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td>Na</td>
+            <td>Na</td>
+            <td>Na</td>
+            <td><input type="text" name="BoundaryWallFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="BoundaryWallRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>36</td>
+            <td>Entrance Gate</td>
+            <td><select name="EntranceGate"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="EntranceGateSpecifyTheNumber"></td>
+            <td>Na</td>
+            <td>Na</td>
+            <td><input type="text" name="EntranceGateFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="EntranceGateRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>37</td>
+            <td>No of Girls Toilet in whole campus</td>
+            <td><select name="GirlsToilet"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="GirlsToiletSpecifyTheNumber"></td>
+            <td>Na</td>
+            <td>Na</td>
+            <td><input type="text" name="GirlsToiletFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="GirlsToiletRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>38</td>
+            <td>No of Boys Toilet in whole campus</td>
+            <td><select name="BoysToilet"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="BoysToiletSpecifyTheNumber"></td>
+            <td><input type="text" name="BoysToiletTotalCapacity"></td>
+            <td><input type="text" name="BoysToiletYearOfConstruction"></td>
+            <td><input type="text" name="BoysToiletFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="BoysToiletRenovationOrConstruction"></td> 
+          </tr>
+
+          <tr>
+            <td>39</td>
+            <td>Area of campus in Acre</td>
+            <td><select name="Acre"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><input type="text" name="AcreSpecifyTheNumber"></td>
+            <td><input type="text" name="AcreTotalCapacity"></td>
+            <td><input type="text" name="AcreYearOfConstruction"></td>
+            <td><input type="text" name="AcreFunctionalOrDysfunctional"></td>
+            <td><input type="text" name="AcreRenovationOrConstruction"></td> 
+          </tr>
+        </tbody>
+      </table>
+      <button type="Submit">Submit</button>
+    </form>
+    <script>
+        document.getElementById("InfrastructureStatus").addEventListener("submit",function(event){
+            event.preventDefault();
+            const formData=new FormData(this)
+            const data = Object.fromEntries(formData.entries())
+            console.log(data)
+            fetch('/v1/form5',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(data),
+            }).then(response=>response.json())
+            .then(data=>{
+                console.log("Success:",data)
+            })
+            .catch(error=>{
+                console.error("Error:",error)
+            })
+        })
+    </script>
+</body>
+</html>
