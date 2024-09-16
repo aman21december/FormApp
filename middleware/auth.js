@@ -1,4 +1,7 @@
 const jwt = require("jsonwebtoken");
+const { ErrorHandler } = require("../helper");
+const { UNAUTHORIZED } = require("../helper/status-codes");
+const { User } = require("../models/User");
 
 /**
  *
@@ -13,12 +16,14 @@ const jwt = require("jsonwebtoken");
  * @returns
  */
 
-module.exports = function (req, res, next) {
-	const { token } = req.headers;
+module.exports =async function (req, res, next) {
+	
+	const  {token}  = req.cookies;
+	
 	let user = { isAuth: false };
 	req.user = user;
 
-	if (!token||token=='null'||token==null) return next();
+	if (!token||token=='null'||token==null) return next(new ErrorHandler(400,"unauthorised"));
 
 	let decoded;
 	try {
@@ -27,9 +32,9 @@ module.exports = function (req, res, next) {
 		return next(err);
 	}
 
-	if (!decoded) return next();
-
-	user = { ...user, isAuth: true, ...decoded };
-	req.user = user;
+	if (!decoded) return next(new ErrorHandler(400,"unauthorised"));
+	const user1=await User.findByPk(decoded.id)
+	user = { ...user, isAuth: true, ...decoded,role:user1.role };
+	req.user =user;
 	return next();
 };

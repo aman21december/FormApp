@@ -30,6 +30,7 @@
 		"casbin-sequelize-adapter": "^2.4.0",
 		"clamscan": "^2.1.2",
 		"cls-hooked": "^4.2.2",
+		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
 		"crypto": "^1.0.1",
 		"dotenv": "^16.0.3",

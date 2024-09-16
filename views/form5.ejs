@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+  <div style="text-align: right;">
+    <form action="/v1/auth/logout">
+        <input type="submit" value="Logout">
+    </form>
+</div>
+
     <h2>Infrastructure STATUS</h2>
     <h3>A. Academic & Administrative Building (Infrastructure Details)</h3>
     <form id="InfrastructureStatus">
@@ -91,7 +97,7 @@
             <td>Na</td>
             <td>NA</td>
             <td><input type="text" name="FlatPanelFunctionalOrDysfunctional"></td>
-            <td><input type="text" name="FlatPanelRenovationOrConstruction"></td>          </tr>
+            <td><input type="text" name="FlatPanelRenovationOrConstruction"></td>   
           </tr>
           <tr>
             <td>8</td>
@@ -116,7 +122,7 @@
           <tr>
             <td>10</td>
             <td>No of Computer in Computer Lab</td>
-            <td><select name="ComputerLabAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
+            <td><select name="NoOfComputerLabAvailable"><option value="yes">Yes</option><option value="no">No</option></select></td>
             <td><input type="text" name="NoOfComputerLabSpecifyTheNumber"></td>
             <td><input type="text" name="NoOfComputerLabTotalCapacity"></td>
             <td><input type="text" name="NoOfComputerLabYearOfConstruction"></td>
@@ -501,11 +507,25 @@
       </table>
       <button type="Submit">Submit</button>
     </form>
+    <a href="http://localhost:5000/v1/form4" type="button">previous</a>
+    <a href="http://localhost:5000/v1/form6" type="button">next</a>
     <script>
         document.getElementById("InfrastructureStatus").addEventListener("submit",function(event){
             event.preventDefault();
             const formData=new FormData(this)
             const data = Object.fromEntries(formData.entries())
+            let isValid=true;
+            let errorMessage=""
+            for(let [key,value] of Object.entries(data)){
+                if(value===""){
+                    isValid=false;
+                    errorMessage+=`${key} is required.\n`;
+                }
+            }
+            if(!isValid){
+                alert(errorMessage)
+                return
+            }
             console.log(data)
             fetch('/v1/form5',{
                 method:"POST",
@@ -516,6 +536,7 @@
             }).then(response=>response.json())
             .then(data=>{
                 console.log("Success:",data)
+                alert("form is submitted")
             })
             .catch(error=>{
                 console.error("Error:",error)

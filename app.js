@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const ejs=require("ejs")
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 require("moment-timezone")().tz("Asia/Kolkata");
-
+const cookieParser=require("cookie-parser")
 const { validator, validateToken, handleError } = require("./middleware");
 
 console.log(process.env.NODE_ENV);
@@ -16,9 +16,12 @@ const sequelize = require("./config/db");
 const { morganLogger } = require("./middleware/logger");
 
 const app = express();
+app.use(cookieParser());
 app.set("view engine", "ejs");
 app.use("/", express.static(path.join(__dirname, "../public")));
-
+app.get('/index', (req, res) => {
+  res.render('index.ejs')
+});
 app
   .use(morganLogger)
  //.use(cors())
@@ -60,7 +63,6 @@ app.use((req, res, next) => {
 });
 
 
-
 app.use("/v1", v1);
 
 
@@ -77,7 +79,4 @@ sequelize
     throw err;
   });
   
-app.get("/",(req,res)=>{
-  res.render("index.ejs")
-})
 module.exports = app;

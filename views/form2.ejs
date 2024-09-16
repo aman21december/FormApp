@@ -8,7 +8,12 @@
 </head>
 
 <body>
-
+    <div style="text-align: right;">
+        <form action="/v1/auth/logout">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+    
     <h3>Programme and Faculty Details</h3>
     <form id="tabularForm">
         <table border="1" cellspacing="0" cellpadding="5">
@@ -41,13 +46,13 @@
             </thead>
             <tbody id="tbody">
                 <tr>
-                    <td><input type="text" name="SrNo"></td>
+                    <td><input type="number" name="SrNo"></td>
                     <td><input type="text" name="NameOfCourse"></td>
                     <td><select name="UgPg" id="Ug/Pg">
                             <option value="Ug">Ug</option>
                             <option value="Pg">Pg</option>
                         </select></td>
-                    <td><input type="text" name="EnrolledStudents"></td>
+                    <td><input type="number" name="EnrolledStudents"></td>
                     <td><input type="text" name="Sanctioned1"></td>
                     <td><input type="text" name="Working1"></td>
                     <td><input type="text" name="Sanctioned2"></td>
@@ -63,6 +68,8 @@
         <!-- <button type="submit">Submit</button> -->
         <button type="button" onclick="submitForm()">Submit</button>
     </form>
+    <a href="http://localhost:5000/v1/form1" type="button">previous</a>
+    <a href="http://localhost:5000/v1/form3" type="button">next</a>
     <script>
         function AddRow() {
             let tbody = document.getElementById("tbody");
@@ -79,10 +86,10 @@
             const cell10 = row.insertCell(9);
             const cell11= row.insertCell(10);
             const cell12= row.insertCell(11);
-            cell1.innerHTML = '<input type="text" name="SrNo">';
+            cell1.innerHTML = '<input type="number" name="SrNo">';
             cell2.innerHTML = '<input type="text" name="NameOfCourse">';
             cell3.innerHTML = '<select name="UgPg" id="Ug/Pg"> <option value="Ug">Ug</option> <option value="Pg">Pg</option></select>';
-                cell4.innerHTML = '<input type="text" name="EnrolledStudents">';
+                cell4.innerHTML = '<input type="number" name="EnrolledStudents">';
                 cell5.innerHTML = '<input type="text" name="Sanctioned1">';
                 cell6.innerHTML = '<input type="text" name="Working1">';
                 cell7.innerHTML = '<input type="text" name="Sanctioned2">';
@@ -94,7 +101,46 @@
         }
 
         function submitForm() {
-           
+        let isValid = true;
+        let errorMessage = "";
+
+        const rowss = document.querySelectorAll("#tbody tr");
+
+        rowss.forEach((row) => {
+            const inputs = row.querySelectorAll("input, select, textarea");
+
+            inputs.forEach(input => {
+                const value = input.value.trim();
+
+                if (input.name === "NameOfCourse"  || input.name==='GuestTeacher' || input.name==="VocationalTeacher"  || input.name.includes("Sanctioned") || input.name.includes("Working")) {
+                    if (value === "") {
+                        isValid = false;
+                        errorMessage += `${input.name} is required.\n`;
+                        input.style.borderColor = "red";
+                    } else {
+                        input.style.borderColor = "";
+                    }
+                }
+
+                if (input.name === "SrNo" || input.name === "EnrolledStudents" ) {
+                    if (isNaN(value) || value === "") {
+                        isValid = false;
+                        errorMessage += `${input.name} must be a number.\n`;
+                        input.style.borderColor = "red";
+                    } else {
+                        input.style.borderColor = "";
+                    }
+                }
+            });
+        });
+
+        if (!isValid) {
+            alert(errorMessage);
+            return;
+        }
+
+      
+
             const data = [];
 
             const rows = document.querySelectorAll("#tbody tr");
@@ -122,6 +168,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                alert("form is submitted")
             })
             .catch((error) => {
                 console.error('Error:', error);

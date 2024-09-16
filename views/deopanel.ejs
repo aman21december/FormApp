@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <%=collegeData[0].addresses[0].Location%> -->
+    <div style="text-align: right;">
+        <form action="/v1/auth/logout">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+    
+    <%collegeData.forEach(college=>{%>
+        <h1><%=college.name%></college.name></h1>
+        <% if(college.BasicInformations && college.BasicInformations.length > 0) { %>
+            <h3>Basic Information</h3>
+            <table border="1" cellspacing="5" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>AISHECODE</th>
+                        <th>Name Of Institution</th>
+                        <th>Year Of Establishment</th>
+                        <th>Name Of The University</th>
+                        <th>Whether the institution is exclusively meant for students from one gender</th>
+                        <th>Whether the institution has NAAC status</th>
+                        <th>In case yes, please give grading details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% college.BasicInformations.forEach(BasicInformation => { %>
+                        <tr>
+                            <td><%= BasicInformation.AISHECODE %></td>
+                            <td><%= BasicInformation.NameOfInstitution %></td>
+                            <td><%= BasicInformation.YearOfEstablishment %></td>
+                            <td><%= BasicInformation.NameOfTheUniversity %></td>
+                            <td><%= BasicInformation.gender %></td>
+                            <td><%= BasicInformation.NAACStatus %></td>
+                            <% if (BasicInformation.GradingDetails) { %>
+                                <td><%= BasicInformation.GradingDetails %></td>
+                            <% } else { %>
+                                <td>N/A</td>
+                            <% } %>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+        
+          <% if(college.OfficersDetails && college.OfficersDetails.length > 0) { %>
+            <h3>Officers Details</h3>
+            <table border="1" cellspacing="5" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>Name of Vice Chancellor/Principal</th>
+                        <th>In case of College Full Time Principal</th>
+                        <th>College Email</th>
+                        <th>Head of Institution Email Id</th>
+                        <th>Mobile Number</th>
+                        <th>Telephone Number (With STD Code)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% college.OfficersDetails.forEach(OfficersDetail => { %>
+                        <tr>
+                            <td><%= OfficersDetail.ViceChancellor %></td>
+                            <td><%= OfficersDetail.FULLTIMEPRINCIPAL %></td>
+                            <td><%= OfficersDetail.email %></td>
+                            <td><%= OfficersDetail.CollegeHeadEmail %></td>
+                            <td><%= OfficersDetail.Mobile %></td>
+                            <td><%= OfficersDetail.Telephone %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+        
+
+          <% if(college.addresses && college.addresses.length > 0) { %>
+            <h3>Address</h3>
+            <table border="1" cellspacing="5" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>Location of the Institution</th>
+                        <th>AddressLine1</th>
+                        <th>AddressLine2</th>
+                        <th>Locality/City/Town/Village</th>
+                        <th>State</th>
+                        <th>District</th>
+                        <th>Country</th>
+                        <th>UrbanLocalBody</th>
+                        <th>PinCode</th>
+                        <th>TotalArea [In Acre]</th>
+                        <th>TotalConstructedArea [In Sqm]</th>
+                        <th>Website</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% college.addresses.forEach(address => { %>
+                        <tr>
+                            <td><%= address.Location %></td>
+                            <td><%= address.AddressLine1 %></td>
+                            <td><%= address.AddressLine2 %></td>
+                            <td><%= address.LocalityCityTownVillage %></td>
+                            <td><%= address.State %></td>
+                            <td><%= address.District %></td>
+                            <td><%= address.Country %></td>
+                            <td><%= address.UrbanLocalBody %></td>
+                            <td><%= address.PinCode %></td>
+                            <td><%= address.TotalAreaInAcre %></td>
+                            <td><%= address.TotalConstructedArea %></td>
+                            <td><%= address.Website %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+        
+          
+          <% if(college.ProgrammeAndFacultyDetails && college.ProgrammeAndFacultyDetails.length > 0) { %>
+            <h3>Programme And Faculty Details</h3>
+            <table border="1" cellspacing="0" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th rowspan="3">Sr No</th>
+                        <th rowspan="3">Name of Course</th>
+                        <th colspan="2">Students Enrolled in all years</th>
+                        <th colspan="6">Faculty Status</th>
+                        <th rowspan="3">Guest teacher working</th>
+                        <th rowspan="3">Vocational Teachers working</th>
+                    </tr>
+                    <tr>
+                        <th>Degree Level</th>
+                        <th>Enrolled Students</th>
+                        <th colspan="2">Assistant Professor</th>
+                        <th colspan="2">Associate Professor</th>
+                        <th colspan="2">Professor</th>
+                    </tr>
+                    <tr>
+                        <th>Dropdown Ug/Pg</th>
+                        <th></th>
+                        <th>Sanctioned</th>
+                        <th>Working</th>
+                        <th>Sanctioned</th>
+                        <th>Working</th>
+                        <th>Sanctioned</th>
+                        <th>Working</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% college.ProgrammeAndFacultyDetails.forEach(ProgrammeAndFacultyDetail => { %>
+                        <tr>
+                            <td><%= ProgrammeAndFacultyDetail.SrNo %></td>
+                            <td><%= ProgrammeAndFacultyDetail.NameOfCourse %></td>
+                            <td><%= ProgrammeAndFacultyDetail.UgPg %></td>
+                            <td><%= ProgrammeAndFacultyDetail.EnrolledStudents%></td>
+                            <td><%= ProgrammeAndFacultyDetail.Sanctioned1 %></td>
+                            <td><%= ProgrammeAndFacultyDetail.Working1 %></td>
+                            <td><%= ProgrammeAndFacultyDetail.Sanctioned2 %></td>
+                            <td><%= ProgrammeAndFacultyDetail.Working2 %></td>
+                            <td><%= ProgrammeAndFacultyDetail.Sanctioned3 %></td>
+                            <td><%= ProgrammeAndFacultyDetail.Working3 %></td>
+                            <td><%= ProgrammeAndFacultyDetail.GuestTeacher %></td>
+                            <td><%= ProgrammeAndFacultyDetail.VocationalTeacher %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+        
+        <% if(college.LegacyDataOfCivilWorks && college.LegacyDataOfCivilWorks.length > 0) { %>
+            <h3>Legacy Data Of CivilWorks</h3>
+            <table border="1" cellpadding="5" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th rowspan="2">S. No.</th>
+                        <th colspan="1">Name of Schemes</th>
+                        <th rowspan="2">Scheme's approval Financial Year</th>
+                        <th rowspan="2">Total Approved Amount</th>
+                        <th rowspan="2">Financial Year amount released</th>
+                        <th rowspan="2">Total expenditure amount</th>
+                        <th rowspan="2">Year of Start of work</th>
+                        <th colspan="6">Status of Project</th>
+                    </tr>
+                    <tr>
+                        <th>Drop down-<br>State Development Grant / RUSA/ PM-USHA / UGC / Other Source</th>
+                        
+                        <th colspan="2">Completed</th>
+                        <th colspan="4">Not Completed</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Hand Over taken</th>
+                        <th>Inaugurated</th>
+                        <th colspan="3">Started</th>
+                        
+                        <th>Not Started</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Y/N</td>
+                        <td>Y/N</td>
+                        <th>Below 25% work</th>
+                        <th>Between 25%-50% of work</th>
+                        <th>Above 50% of work</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% college.LegacyDataOfCivilWorks.forEach(LegacyDataOfCivilWorks => { %>
+                        <tr>
+                            <td><%= LegacyDataOfCivilWorks.SNO   %></td>
+                            <td><%= LegacyDataOfCivilWorks.NameOfSchemes %></td>
+                            <td><%= LegacyDataOfCivilWorks.SchemeApprovalFinancialyear %></td>
+                            <td><%= LegacyDataOfCivilWorks.TotalApprovedAmount%></td>
+                            <td><%= LegacyDataOfCivilWorks.FinancialYearAmountReleased %></td>
+                            <td><%= LegacyDataOfCivilWorks.TotalExpemditureAmount %></td>
+                            <td><%= LegacyDataOfCivilWorks.YearOfStartOfWork %></td>
+                            <td><%= LegacyDataOfCivilWorks.HandOverTaken %></td>
+                            <td><%= LegacyDataOfCivilWorks.Inaugurated %></td>
+                            <td><%= LegacyDataOfCivilWorks.Below25percentwork %></td>
+                            <td><%= LegacyDataOfCivilWorks.Between25to50percentwork %></td>
+                            <td><%= LegacyDataOfCivilWorks.Above50percentwork %></td>
+                            <td><%= LegacyDataOfCivilWorks.NotStarted %></td>       
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %> 
+
+        <% if(college.FinancialInformations && college.FinancialInformations.length > 0) { %>
+            <h3>Financial Informations</h3>
+            <table border="1" cellspacing="0" cellpadding="0.5">
+                <thead>
+                    <tr>
+                        <td colspan="3">Income</td>
+                        <td colspan="2">Expenditure</td>
+                    </tr>
+                    <tr>
+                        <td>S.No</td>
+                        <td>Items</td>
+                        <td>Amount in absolute Rs</td>
+                        <td>Expenditure Head</td>
+                        <td>Amount in absolute Rs</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% college.FinancialInformations.forEach(FinancialInformations => { %>
+                        <tr>
+                            <td>1</td>
+                            <td>Internal Source</td>
+                            <td></td>       
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>(i)</td>
+                            <td>Tuition Fee and other fee</td>
+                            <td><%= FinancialInformations.tuition_fee   %></td>
+                            <td><%= FinancialInformations.tuition_expenditure   %></td>
+                            <td><%= FinancialInformations.tuition_expenditure_amount   %></td>
+                        </tr>
+                        <tr>
+                            <td>(ii)</td>
+                            <td>Examination Fee</td>
+                            <td><%= FinancialInformations.exam_fee   %></td>
+                            <td><%= FinancialInformations.exam_expenditure   %></td>
+                            <td><%= FinancialInformations.exam_expenditure_amount   %></td>
+                        </tr>
+                        <tr>
+                            <td>(iii)</td>
+                            <td>Donations</td>
+                            <td><%= FinancialInformations.donations   %></td>
+                            <td><%= FinancialInformations.donations_expenditure   %></td>
+                            <td><%= FinancialInformations.donations_expenditure_amount   %></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Deveopment Grant received from state government</td>
+                            <td><%= FinancialInformations.dev_grant   %></td>
+                            <td><%= FinancialInformations.dev_grant_expenditure   %></td>
+                            <td><%= FinancialInformations.dev_grant_expenditure_amount   %></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Grant received from university (In case of college)</td>
+                            <td><%= FinancialInformations.uni_grant   %></td>
+                            <td><%= FinancialInformations.uni_grant_expenditure   %></td>
+                            <td><%= FinancialInformations.uni_grant_expenditure_amount   %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %> 
+
+        <% if(college.infraStatuses && college.infraStatuses.length > 0) { %>
+            <h3>Infrastructure STATUS</h3>
+            <h3>A. Academic & Administrative Building (Infrastructure Details)</h3>
+            <table border="1" cellspacing="0" cellpadding="0.5">
+                    <thead>
+                      <tr>
+                        <th>Sl. No.</th>
+                        <th>Parameters</th>
+                        <th>Available (Y/N)</th>
+                        <th>Specify the Number</th>
+                        <th>Total Capacity</th>
+                        <th>Year of Construction (approx. years)</th>
+                        <th>Is it functional or dysfunctional?</th>
+                        <th>Does it need renovation or new construction?</th>
+                      </tr>
+                    </thead>
+                <tbody>
+                    <% college.infraStatuses.forEach(infraStatus => { %>
+                        <tr>
+                            <td>1</td>
+                            <td>Auditorium</td>
+                            <td><%= infraStatus.AuditoriumAvailable   %></td>
+                            <td><%= infraStatus.AuditoriumSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.AuditoriumTotalCapacity   %></td>
+                            <td><%= infraStatus.AuditoriumYearOfConstruction   %></td>
+                            <td><%= infraStatus.AuditoriumFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.AuditoriumRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>Seminar Hall</td>
+                            <td><%= infraStatus.SeminarHallAvailable   %></td>
+                            <td><%= infraStatus.SeminarHallSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.SeminarHallTotalCapacity   %></td>
+                            <td><%= infraStatus.SeminarHallYearOfConstruction   %></td>
+                            <td><%= infraStatus.SeminarHallFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.SeminarHallRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>Classrooms</td>
+                            <td><%= infraStatus.ClassroomsHallAvailable   %></td>
+                            <td><%= infraStatus.ClassroomsSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.ClassroomsTotalCapacity   %></td>
+                            <td><%= infraStatus.ClassroomsYearOfConstruction   %></td>
+                            <td><%= infraStatus.ClassroomsFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.ClassroomsRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>Classrooms with Projector</td>
+                            <td><%= infraStatus.ClassroomsWithProjectorHallAvailable   %></td>
+                            <td><%= infraStatus.ClassroomsWithProjectorSpecifyTheNumber   %></td>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td><%= infraStatus.ClassroomsWithProjectorFunctionalOrDysfunctional   %></td>
+                            <td>NA</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>Smart Classrooms</td>
+                            <td><%= infraStatus.SmartClassroomsAvailable   %></td>
+                            <td><%= infraStatus.SmartClassroomsSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.SmartClassroomsTotalCapacity   %></td>
+                            <td>NA</td>
+                            <td><%= infraStatus.SmartClassroomsFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.SmartClassroomsRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>No of Projects</td>
+                            <td><%= infraStatus.ProjectsAvailable   %></td>
+                            <td><%= infraStatus.ProjectsSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.ProjectsTotalCapacity   %></td>
+                            <td>NA</td>
+                            <td><%= infraStatus.ProjectsFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.ProjectsRenovationOrConstruction   %></td>
+                         </tr>
+                          <tr>
+                            <td>7</td>
+                            <td>No of Interactive Flat Panel</td>
+                            <td><%= infraStatus.FlatPanelAvailable   %></td>
+                            <td><%= infraStatus.FlatPanelSpecifyTheNumber   %></td>
+                            <td>Na</td>
+                            <td>NA</td>
+                            <td><%= infraStatus.FlatPanelFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.FlatPanelRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>8</td>
+                            <td>Drinking water facility</td>
+                            <td><%= infraStatus.DrinkingWaterFacilityAvailable   %></td>
+                            <td><%= infraStatus.DrinkingWaterFacilitySpecifyTheNumber   %></td>
+                            <td><%= infraStatus.DrinkingWaterFacilityTotalCapacity   %></td>
+                            <td>NA</td>
+                            <td><%= infraStatus.DrinkingWaterFacilityFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.DrinkingWaterFacilityRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>9</td>
+                            <td>Computer Lab</td>
+                            <td><%= infraStatus.ComputerLabAvailable   %></td>
+                            <td><%= infraStatus.ComputerLabSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.ComputerLabTotalCapacity   %></td>
+                            <td><%= infraStatus.ComputerLabYearOfConstruction   %></td>
+                            <td><%= infraStatus.ComputerLabFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.ClassroomsRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>10</td>
+                            <td>No of Computer in Computer Lab</td>
+                            <td><%= infraStatus.NoOfComputerLabAvailable   %></td>
+                            <td><%= infraStatus.NoOfComputerLabSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.NoOfComputerLabTotalCapacity   %></td>
+                            <td><%= infraStatus.NoOfComputerLabYearOfConstruction   %></td>
+                            <td><%= infraStatus.NoOfComputerLabFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.NoOfComputerLabRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>11</td>
+                            <td>Library</td>
+                            <td><%= infraStatus.LibraryAvailable   %></td>
+                            <td><%= infraStatus.LibrarySpecifyTheNumber   %></td>
+                            <td><%= infraStatus.LibraryTotalCapacity   %></td>
+                            <td><%= infraStatus.LibraryYearOfConstruction   %></td>
+                            <td><%= infraStatus.LibraryFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.LibraryRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>12</td>
+                            <td>Hostel for Boys</td>
+                            <td><%= infraStatus.BoysHostel   %></td>
+                            <td><%= infraStatus.BoysHostelSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.BoysHostelTotalCapacity   %></td>
+                            <td><%= infraStatus.BoysHostelYearOfConstruction   %></td>
+                            <td><%= infraStatus.BoysHostelFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.BoysHostelRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>13</td>
+                            <td>Hostel for Girls</td>
+                            <td><%= infraStatus.GirlsHostel   %></td>
+                            <td><%= infraStatus.GirlsHostelSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.GirlsHostelTotalCapacity   %></td>
+                            <td><%= infraStatus.GirlsHostelYearOfConstruction   %></td>
+                            <td><%= infraStatus.GirlsHostelFunctionalOrDysfunctional   %></td>
+                            <td><%= infraStatus.GirlsHostelRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>14</td>
+                            <td>Reading Room</td>
+                            <td><%= infraStatus.ReadingRoom   %></td>
+                            <td><%= infraStatus.ReadingRoomSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.ReadingRoomTotalCapacity   %></td>
+                            <td><%= infraStatus.ReadingRoomYearOfConstruction   %></td>
+                            <td><%= infraStatus.ReadingRoomFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.ReadingRoomRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>15</td>
+                            <td>Common Room</td>
+                            <td><%= infraStatus.CommonRoom   %></td>
+                            <td><%= infraStatus.CommonRoomSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.CommonRoomTotalCapacity   %></td>
+                            <td><%= infraStatus.CommonRoomYearOfConstruction   %></td>
+                            <td><%= infraStatus.CommonRoomFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.CommonRoomRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td>16</td>
+                            <td>
+                              Laboratory <br>
+                              Physics Lab
+                            </td>
+                            <td><%= infraStatus.PhysicsLab   %></td>
+                            <td><%= infraStatus.PhysicsLabSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.PhysicsLabTotalCapacity   %></td>
+                            <td><%= infraStatus.PhysicsLabYearOfConstruction   %></td>
+                            <td><%= infraStatus.PhysicsLabFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.PhysicsLabRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>
+                              Zoology Lab
+                            </td>
+                            <td><%= infraStatus.ZoologyLab   %></td>
+                            <td><%= infraStatus.ZoologyLabSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.ZoologyLabTotalCapacity   %></td>
+                            <td><%= infraStatus.ZoologyLabYearOfConstruction   %></td>
+                            <td><%= infraStatus.ZoologyLabFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.ZoologyLabRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td> 
+                              Botany Lab
+                            </td>
+                            <td><%= infraStatus.BotanyLab   %></td>
+                            <td><%= infraStatus.BotanyLabSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.BotanyLabTotalCapacity   %></td>
+                            <td><%= infraStatus.BotanyLabYearOfConstruction   %></td>
+                            <td><%= infraStatus.BotanyLabFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.BotanyLabRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>
+                              Botanical Garden
+                            </td>
+                            <td><%= infraStatus.BotanicalGarden   %></td>
+                            <td><%= infraStatus.BotanicalGardenSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.BotanicalGardenTotalCapacity   %></td>
+                            <td><%= infraStatus.BotanicalGardenYearOfConstruction   %></td>
+                            <td><%= infraStatus.BotanicalGardenFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.BotanicalGardenRenovationOrConstruction   %></td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>
+                              Psychology
+                            </td>
+                            <td><%= infraStatus.Psychology   %></td>
+                            <td><%= infraStatus.PsychologySpecifyTheNumber   %></td>
+                            <td><%= infraStatus.PsychologyTotalCapacity   %></td>
+                            <td><%= infraStatus.PsychologyYearOfConstruction   %></td>
+                            <td><%= infraStatus.PsychologyFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.PsychologyRenovationOrConstruction   %></td> 
+                            </tr>
+                          <tr>
+                            <td></td>
+                            <td>
+                             Geogrophy
+                            </td>
+                            <td><%= infraStatus.Geogrophy   %></td>
+                            <td><%= infraStatus.GeogrophySpecifyTheNumber   %></td>
+                            <td><%= infraStatus.GeogrophyTotalCapacity   %></td>
+                            <td><%= infraStatus.GeogrophyYearOfConstruction   %></td>
+                            <td><%= infraStatus.GeogrophyFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.GeogrophyRenovationOrConstruction   %></td> 
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>
+                              HomeScience
+                            </td>
+                            <td><%= infraStatus.HomeScience   %></td>
+                            <td><%= infraStatus.HomeScienceSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.HomeScienceTotalCapacity   %></td>
+                            <td><%= infraStatus.HomeScienceYearOfConstruction   %></td>
+                            <td><%= infraStatus.HomeScienceFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.HomeScienceRenovationOrConstruction    %></td>  
+                          </tr>
+                          <tr>
+                            <td>17</td>
+                            <td>Language Lab/Virtual Lab</td>
+                            <td><%= infraStatus.LanguageLab   %></td>
+                            <td><%= infraStatus.LanguageLabSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.LanguageLabTotalCapacity   %></td>
+                            <td><%= infraStatus.LanguageLabYearOfConstruction   %></td>
+                            <td><%= infraStatus.LanguageLabFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.LanguageLabRenovationOrConstruction    %></td> 
+                          </tr>
+                          <tr>
+                            <td>18</td>
+                            <td>Canteen/Cafeteria</td>
+                            <td><%= infraStatus.Canteen   %></td>
+                            <td><%= infraStatus.CanteenSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.CanteenTotalCapacity   %></td>
+                            <td><%= infraStatus.CanteenYearOfConstruction   %></td>
+                            <td><%= infraStatus.CanteenFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.CanteenRenovationOrConstruction    %></td>   
+                          </tr>
+                          <tr>
+                            <td>19</td>
+                            <td>Basic Health Care Facility</td>
+                            <td><%= infraStatus.HealthCare   %></td>
+                            <td><%= infraStatus.HealthCareSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.HealthCareTotalCapacity   %></td>
+                            <td><%= infraStatus.HealthCareYearOfConstruction   %></td>
+                            <td><%= infraStatus.HealthCareFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.HealthCareRenovationOrConstruction    %></td>
+                          </tr>
+                          <tr>
+                            <td>20</td>
+                            <td>Media/Print Production/Reprography</td>
+                            <td><%= infraStatus.HealthCare   %></td>
+                            <td><%= infraStatus.HealthCareSpecifyTheNumber   %></td>
+                            <td>NA</td>
+                            <td><%= infraStatus.MediaYearOfConstruction   %></td>
+                            <td><%= infraStatus.MediaFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.MediaRenovationOrConstruction    %></td>  
+                          </tr>
+                          <tr>
+                            <td>21</td>
+                            <td>Professors Cabin</td>
+                            <td><%= infraStatus.ProfessorsCabin   %></td>
+                            <td><%= infraStatus.ProfessorsCabinSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.ProfessorsCabinTotalCapacity   %></td>
+                            <td><%= infraStatus.ProfessorsCabinYearOfConstruction   %></td>
+                            <td><%= infraStatus.ProfessorsCabinFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.ProfessorsCabinRenovationOrConstruction    %></td>  
+                          </tr>
+                          <tr>
+                            <td>22</td>
+                            <td>Teachers Room</td>
+                            <td><%= infraStatus.TeachersRoom   %></td>
+                            <td><%= infraStatus.TeachersRoomSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.TeachersRoomTotalCapacity   %></td>
+                            <td><%= infraStatus.TeachersRoomYearOfConstruction   %></td>
+                            <td><%= infraStatus.TeachersRoomFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.TeachersRoomRenovationOrConstruction    %></td> 
+                          </tr>
+                          <tr>
+                            <td>23</td>
+                            <td>Residence for Teaching Staff</td>
+                            <td><%= infraStatus.ResidenceTeachingStaff   %></td>
+                            <td><%= infraStatus.ResidenceTeachingStaffSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.ResidenceTeachingStaffTotalCapacity   %></td>
+                            <td><%= infraStatus.ResidenceTeachingStaffYearOfConstruction   %></td>
+                            <td><%= infraStatus.ResidenceTeachingStaffFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.ResidenceTeachingStaffRenovationOrConstruction    %></td> 
+                          </tr>
+                          <tr>
+                            <td>24</td>
+                            <td>Residence for Non Teaching Staff</td>
+                            <td><%= infraStatus.ResidenceNonTeachingStaff   %></td>
+                            <td><%= infraStatus.ResidenceNonTeachingStaffSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.ResidenceNonTeachingStaffTotalCapacity   %></td>
+                            <td><%= infraStatus.ResidenceNonTeachingStaffYearOfConstruction   %></td>
+                            <td><%= infraStatus.ResidenceNonTeachingStaffFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.ResidenceNonTeachingStaffRenovationOrConstruction    %></td> 
+                          </tr>
+                          <tr>
+                            <td>25</td>
+                            <td>Computer Centre</td>
+                            <td><%= infraStatus.ComputerCentre   %></td>
+                            <td><%= infraStatus.ComputerCentreSpecifyTheNumber   %></td>
+                            <td>NA</td>
+                            <td><%= infraStatus.ComputerCentreYearOfConstruction   %></td>
+                            <td><%= infraStatus.ComputerCentreFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.ComputerCentreRenovationOrConstruction    %></td> 
+                          </tr>
+                          <tr>
+                            <td>26</td>
+                            <td>Counseling/Guidance Services Room</td>
+                            <td><%= infraStatus.Counseling   %></td>
+                            <td><%= infraStatus.CounselingSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.CounselingTotalCapacity   %></td>
+                            <td><%= infraStatus.CounselingYearOfConstruction   %></td>
+                            <td><%= infraStatus.CounselingFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.CounselingRenovationOrConstruction    %></td>
+                          </tr>
+                          <tr>
+                            <td>27</td>
+                            <td>NSS/NCC Room</td>
+                            <td><%= infraStatus.Nss   %></td>
+                            <td><%= infraStatus.NssSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.NssTotalCapacity   %></td>
+                            <td><%= infraStatus.NssYearOfConstruction   %></td>
+                            <td><%= infraStatus.NssFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.NssRenovationOrConstruction    %></td>
+                          </tr>
+                          <tr>
+                            <td>28</td>
+                            <td>Gymnasium and Yoga facilities</td>
+                            <td><%= infraStatus.Yoga   %></td>
+                            <td><%= infraStatus.YogaSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.YogaTotalCapacity   %></td>
+                            <td><%= infraStatus.YogaYearOfConstruction   %></td>
+                            <td><%= infraStatus.YogaFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.YogaRenovationOrConstruction    %></td>  
+                          </tr>
+                          <tr>
+                            <td>29</td>
+                            <td>Skill Development Centre</td>
+                            <td><%= infraStatus.SkillCentre   %></td>
+                            <td><%= infraStatus.SkillCentreSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.SkillCentreTotalCapacity   %></td>
+                            <td><%= infraStatus.SkillCentreYearOfConstruction   %></td>
+                            <td><%= infraStatus.SkillCentreFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.SkillCentreRenovationOrConstruction    %></td>   
+                          </tr>
+                          <tr>
+                            <td>30</td>
+                            <td>Playground</td>
+                            <td><%= infraStatus.Playground   %></td>
+                            <td><%= infraStatus.PlaygroundSpecifyTheNumber   %></td>
+                            <td>Na</td>
+                            <td>Na</td>
+                            <td><%= infraStatus.PlaygroundFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.PlaygroundRenovationOrConstruction    %></td>
+                          </tr>
+                
+                          <tr>
+                            <td>31</td>
+                            <td>Indoor Games Facility</td>
+                            <td><%= infraStatus.Indoor   %></td>
+                            <td><%= infraStatus.IndoorSpecifyTheNumber   %></td>
+                            <td>Na</td>
+                            <td>Na</td>
+                            <td><%= infraStatus.IndoorFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.IndoorRenovationOrConstruction    %></td>
+                          </tr>
+                
+                          <tr>
+                            <td>32</td>
+                            <td>CCTV Monitoring</td>
+                            <td><%= infraStatus.CCTVMonitoring   %></td>
+                            <td><%= infraStatus.CCTVMonitoringSpecifyTheNumber   %></td>
+                            <td>Na</td>
+                            <td>Na</td>
+                            <td><%= infraStatus.CCTVMonitoringFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.CCTVMonitoringRenovationOrConstruction    %></td>               
+                         </tr>
+                
+                          <tr>
+                            <td>33</td>
+                            <td>Wi-Fi/Lan network in the campus</td>
+                            <td><%= infraStatus.Wifi   %></td>
+                            <td><%= infraStatus.WifiSpecifyTheNumber   %></td>
+                            <td>Na</td>
+                            <td>Na</td>
+                            <td><%= infraStatus.WifiFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.WifiRenovationOrConstruction    %></td>                         
+                          </tr>
+                
+                          <tr>
+                            <td>34</td>
+                            <td>Guest House</td>
+                            <td><%= infraStatus.GuestHouse   %></td>
+                            <td><%= infraStatus.GuestHouseSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.GuestHouseTotalCapacity   %></td>
+                            <td><%= infraStatus.GuestHouseYearOfConstruction   %></td>
+                            <td><%= infraStatus.GuestHouseFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.GuestHouseRenovationOrConstruction    %></td>  
+                          </tr>
+                
+                          <tr>
+                            <td>35</td>
+                            <td>Boundary Wall</td>
+                            <td><%= infraStatus.BoundaryWall   %></td>
+                            <td>Na</td>
+                            <td>Na</td>
+                            <td>Na</td>
+                            <td><%= infraStatus.BoundaryWallFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.BoundaryWallRenovationOrConstruction    %></td>  
+                          </tr>
+                
+                          <tr>
+                            <td>36</td>
+                            <td>Entrance Gate</td>
+                            <td><%= infraStatus.EntranceGate   %></td>
+                            <td><%= infraStatus.EntranceGateSpecifyTheNumber   %></td>
+                            <td>Na</td>
+                            <td>Na</td>
+                            <td><%= infraStatus.EntranceGateFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.EntranceGateRenovationOrConstruction    %></td>  
+                          </tr>
+                
+                          <tr>
+                            <td>37</td>
+                            <td>No of Girls Toilet in whole campus</td>
+                            <td><%= infraStatus.GirlsToilet   %></td>
+                            <td><%= infraStatus.GirlsToiletSpecifyTheNumber   %></td>
+                            <td>Na</td>
+                            <td>Na</td>
+                            <td><%= infraStatus.GirlsToiletFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.GirlsToiletRenovationOrConstruction    %></td>  
+                          </tr>
+                
+                          <tr>
+                            <td>38</td>
+                            <td>No of Boys Toilet in whole campus</td>
+                            <td><%= infraStatus.BoysToilet    %></td>
+                            <td><%= infraStatus.BoysToiletSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.BoysToiletTotalCapacity   %></td>
+                            <td><%= infraStatus.BoysToiletYearOfConstruction   %></td>
+                            <td><%= infraStatus.BoysToiletFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.BoysToiletRenovationOrConstruction    %></td>  
+                          </tr>
+                
+                          <tr>
+                            <td>39</td>
+                            <td>Area of campus in Acre</td>
+                            <td><%= infraStatus.Acre    %></td>
+                            <td><%= infraStatus.AcreSpecifyTheNumber   %></td>
+                            <td><%= infraStatus.AcreTotalCapacity   %></td>
+                            <td><%= infraStatus.AcreYearOfConstruction   %></td>
+                            <td><%= infraStatus.AcreFunctionalOrDysfunctional  %></td>
+                            <td><%= infraStatus.AcreRenovationOrConstruction    %></td> 
+                          </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %> 
+
+        <% if(college.infraConstructions && college.infraConstructions.length > 0) { %>
+            <h4>Infra Construction</h4>
+            <h5>Institution proposed Infrastructure construction work list dowm in priority:</h5>
+            <table border="1" cellpadding="5" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Description of Infrastructure</th>
+                        <th>Purpose of Infrastructure</th>
+                        <th>Proposed Area Sq feet</th>
+                        <th>Total cost per Sq feet</th>
+                        <th>Total cost</th>
+                        <th>Total amount in internal Source</th>
+                        <th>Justification why it cant be done by internal source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% college.infraConstructions.forEach(infraConstruction => { %>
+                        <tr>
+                            <td><%= infraConstruction.SNO   %></td>
+                            <td><%= infraConstruction.DescriptionOfInfrastructure %></td>
+                            <td><%= infraConstruction.PurposeOfInfrastructure %></td>
+                            <td><%= infraConstruction.ProposedAreaSqFeet%></td>
+                            <td><%= infraConstruction.TotalCostPerSqFeet %></td>
+                            <td><%= infraConstruction.TotalCost %></td>
+                            <td><%= infraConstruction.TotalAmountInInternalSource %></td>
+                            <td><%= infraConstruction.JustificationWhyItCantBeDoneByInternalSource %></td>     
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %> 
+
+        <% if(college.infraRenovations && college.infraRenovations.length > 0) { %>
+            <h4>Infra Renovation</h4>
+            <h5>Institution Proposed Infrastructure Renovation/Upgradation work list down in priority.</h5>
+            <table border="1" cellpadding="5" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Description of Infrastructure</th>
+                        <th>Purpose of Infrastructure</th>
+                        <th>Proposed Area Sq feet</th>
+                        <th>Total cost per Sq feet</th>
+                        <th>Total cost</th>
+                        <th>Total amount in internal Source</th>
+                        <th>Justification why it cant be done by internal source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% college.infraRenovations.forEach(infraRenovation => { %>
+                        <tr>
+                            <td><%= infraRenovation.SNO   %></td>
+                            <td><%= infraRenovation.DescriptionOfInfrastructure %></td>
+                            <td><%= infraRenovation.DetailOfRenovationUpgradationProposed %></td>
+                            <td><%= infraRenovation.ProposedAreaSqFeet%></td>
+                            <td><%= infraRenovation.TotalCostPerSqFeet %></td>
+                            <td><%= infraRenovation.TotalCost %></td>
+                            <td><%= infraRenovation.TotalAmountInInternalSource %></td>
+                            <td><%= infraRenovation.JustificationWhyItCantBeDoneByInternalSource %></td>     
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %> 
+        <hr>
+    <%})%>
+    
+</body>
+</html>

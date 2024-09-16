@@ -1,7 +1,16 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const { User } = require('./User');
 
 const BasicInformation = sequelize.define('BasicInformation', {
+    collegeId:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        references:{
+            model:User,
+            key:"id"
+        }
+    },
     AISHECODE: {
         type: DataTypes.STRING,
         allowNull: false
@@ -35,6 +44,10 @@ const BasicInformation = sequelize.define('BasicInformation', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 });
+
+
+User.hasMany(BasicInformation, { foreignKey: 'collegeId' });
+BasicInformation.belongsTo(User, { foreignKey: 'collegeId' });
 sequelize.sync().then(() => {
     console.log('basic Information table created successfully!');
  }).catch((error) => {

@@ -6,11 +6,17 @@
     <title>Basic Information</title>
 </head>
 <body>
+    <div style="text-align: right;">
+        <form action="/v1/auth/logout">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+    
     <h3>
         A: Basic Details
     </h3>
 
-    <form action="/v1/basicInformation" method="post">
+    <form  id="basicInformation">
         <label for="AISHECODE">1: AISHECODE:</label>
         <input type="text" id="AISHECODE" name="AISHECODE"><br>
         <label for="NameOfInstitution">2: Name Of Institution:</label>
@@ -22,11 +28,11 @@
         <input type="text" id="NameOfTheUniversity" name="NameOfTheUniversity">
         <fieldset>
             <legend>5: Whether the institution is exclusively meant for students from one gender</legend>
-            <input type="radio" id="Yes, only for girls" name="gender" value="Yes, only for girls">
+            <input type="radio" id="YesOnlyGirls" name="gender" value="Yes, only for girls">
             <label for="Yes, only for girls">Yes, only for girls</label>
-            <input type="radio" id="Yes, only for boys" name="gender" value="Yes, only for boys">
+            <input type="radio" id="YesOnlyBoys" name="gender" value="Yes, only for boys">
             <label for="Yes, only for boys">Yes, only for boys</label>
-            <input type="radio" id="for both gender" name="gender" value="for both gender">
+            <input type="radio" id="bothgender" name="gender" value="for both gender">
             <label for="for both gender">for both gender</label>
         </fieldset>
         <fieldset>
@@ -36,12 +42,12 @@
             <input type="radio" id="No" name="NAACStatus" value="no">
             <label for="No">No</label>
             <label for="In case yes please give grading details">&emsp; In case yes please give grading details</label>
-            <input type="text" id="In case yes please give grading details" name="GradingDetails">
+            <input type="text" id="GradingDetails" name="GradingDetails">
         </fieldset>   
         <input type="submit" value="submit">
     </form>
     <h3>B: Officers Details</h3>
-    <form action="/v1/officersDetails" method="post">
+    <form id="officersDetails">
         <label for="ViceChancellor">(i) Name of Vice Chancellor/Principal</label>
         <input type="text" id="ViceChancellor" name="ViceChancellor"><br>
         <fieldset>
@@ -62,7 +68,7 @@
         <input type="submit" value="submit">
     </form>
     <h3>C: Address</h3>
-    <form action="/v1/address" method="post">
+    <form id="address">
         <fieldset>
             <legend>Location of the Institution</legend>
             <input type="radio" name="Location" id="urban" value="urban">
@@ -74,7 +80,7 @@
         <input type="text" id="AddressLine1" name="AddressLine1"><br>
         <label for="AddressLine2">AddressLine2</label>
         <input type="text" id="AddressLine2" name="AddressLine2"><br>
-        <label for="LocalityCityTownVillage">LocalityCityTownVillage</label>
+        <label for="LocalityCityTownVillage">Locality/City/Town/Village</label>
         <input type="text" id="LocalityCityTownVillage" name="LocalityCityTownVillage"><br>
         <label for="State">State</label>
         <input type="text" id="State" name="State"><br>
@@ -86,14 +92,231 @@
         <label for="UrbanLocalBody">UrbanLocalBody</label>
         <input type="text" id="UrbanLocalBody" name="UrbanLocalBody"><br>
         <label for="PinCode">PinCode</label>
-        <input type="text" id="PinCode" name="PinCode"><br>
+        <input type="number" id="PinCode" name="PinCode"><br>
         <label for="TotalAreaInAcre">TotalArea[InAcre]</label>
-        <input type="text" id="TotalAreaInAcre" name="TotalAreaInAcre"><br>
+        <input type="number" id="TotalAreaInAcre" name="TotalAreaInAcre"><br>
         <label for="TotalConstructedArea[Insqm]">TotalConstructedArea[InSqm]</label>
-        <input type="text" id="TotalConstructedArea[Insqm]" name="TotalConstructedArea"><br>
+        <input type="number" id="TotalConstructedArea" name="TotalConstructedArea"><br>
         <label for="Website">Website</label>
         <input type="text" id="Website" name="Website"><br>
         <input type="submit" value="submit">
     </form>
+    <a href="http://localhost:5000/v1/form2" type="button">next</a>
 </body>
+<script>
+     document.getElementById("basicInformation").addEventListener("submit",function(event){
+            event.preventDefault();
+        const aisheCode = document.getElementById('AISHECODE').value;
+        const institutionName = document.getElementById('NameOfInstitution').value;
+        const yearOfEstablishment = document.getElementById('YearOfEstablishment').value;
+        const universityName = document.getElementById('NameOfTheUniversity').value;
+  
+        const genderRadios = document.getElementsByName('gender');
+        const naacStatusRadios = document.getElementsByName('NAACStatus');
+        const gradingDetails = document.getElementById('GradingDetails').value;
+
+        // Check if AISHECODE is provided
+        if (aisheCode === "") {
+            alert("AISHECODE must be filled out.");
+            return;
+        }
+
+        // Check if Name of Institution is provided
+        if (institutionName === "") {
+            alert("Name of Institution must be filled out.");
+            return;
+        }
+
+        // Validate Year of Establishment
+        if (yearOfEstablishment === "" || isNaN(yearOfEstablishment) || yearOfEstablishment.length !== 4) {
+            alert("Please provide a valid Year of Establishment (4 digits).");
+            return;
+        }
+
+        // Check if Name of the University is provided
+        if (universityName === "") {
+            alert("Name of the University must be filled out.");
+            return;
+        }
+
+        // Validate that a gender radio button is selected
+        if (![...genderRadios].some(radio => radio.checked)) {
+            alert("Please select the institution's gender status.");
+            return;
+        }
+
+        // Validate NAAC Status radio button and conditional grading details
+        if (![...naacStatusRadios].some(radio => radio.checked)) {
+            alert("Please select the NAAC status.");
+            return;
+        }
+
+        const naacStatus = [...naacStatusRadios].find(radio => radio.checked).value;
+        
+        // Check if grading details are provided if NAAC status is "Yes"
+        if (naacStatus === "yes" && gradingDetails === "") {
+            alert("Please provide grading details for NAAC status.");
+            return;
+        }
+            const formData=new FormData(this)
+            const data = Object.fromEntries(formData.entries())
+            console.log(data)
+            fetch('/v1/form1/basicInformation',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(data),
+            }).then(response=>response.json())
+            .then(data=>{
+                console.log("Success:",data)
+                alert("form is submitted")
+            })
+            .catch(error=>{
+                console.error("Error:",error)
+            })
+        })
+        document.getElementById("officersDetails").addEventListener("submit",function(event){
+            event.preventDefault();
+            const viceChancellor = document.getElementById('ViceChancellor').value;
+            const FULLTIMEPRINCIPAL = document.getElementsByName('FULLTIMEPRINCIPAL');
+        const CollegeEmail = document.getElementById('CollegeEmail').value;
+        const CollegeHeadEmail = document.getElementById('CollegeHeadEmail').value;
+        const Mobile = document.getElementById('Mobile').value;
+        const Telephone = document.getElementById('Telephone').value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+        const mobileRegex = /^\d{10}$/;
+        const telephoneRegex = /^0\d{2,5}[- ]?\d{6,8}$/;
+        if (viceChancellor === "") {
+         alert("Please provide the name of the Vice Chancellor/Principal.");
+         return;
+        } 
+        if (![...FULLTIMEPRINCIPAL].some(radio => radio.checked)) {
+            alert("Please select whether the college has a full-time principal.");
+         return;
+        } 
+         if (!emailRegex.test(CollegeEmail)) {
+            alert("Please provide a valid College Email.");
+         return;
+        }
+        if (!emailRegex.test(CollegeHeadEmail)) {
+            alert("Please provide a valid Head of Institution Email.");
+         return;
+         }
+         if (!mobileRegex.test(Mobile)) {
+         alert("Please provide a valid 10-digit Mobile Number.");
+         return;
+        }
+        if (!telephoneRegex.test(Telephone)) {
+         alert("Please provide a valid Telephone Number.");
+        return;
+        }
+        const formData=new FormData(this)
+            const data = Object.fromEntries(formData.entries())
+            console.log(data)
+            fetch('/v1/form1/officersDetails',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(data),
+            }).then(response=>response.json())
+            .then(data=>{
+                console.log("Success:",data)
+                alert("form is submitted")
+            })
+            .catch(error=>{
+                console.error("Error:",error)
+            })
+        })
+        document.getElementById("address").addEventListener("submit",function(event){
+            event.preventDefault();
+            const Location = document.getElementsByName('Location');
+            const AddressLine1 = document.getElementById('AddressLine1').value;
+        const AddressLine2 = document.getElementById('AddressLine2').value;
+        const LocalityCityTownVillage = document.getElementById('LocalityCityTownVillage').value;
+        const State = document.getElementById('State').value;
+        const District = document.getElementById('District').value;
+        const Country = document.getElementById('Country').value;
+        const UrbanLocalBody = document.getElementById('UrbanLocalBody').value;
+        const PinCode = document.getElementById('PinCode').value;
+        const TotalAreaInAcre = document.getElementById('TotalAreaInAcre').value;
+        const TotalConstructedArea = document.getElementById('TotalConstructedArea').value;
+        const Website = document.getElementById('Website').value;
+            if(![...Location].some(radio=>radio.checked)){
+                alert("please select urban or rural radio")
+                return
+            }
+            if(AddressLine1==='')
+            {
+               alert("please provide Address Line 1")
+               return
+            }
+            if(AddressLine2==='')
+            {
+               alert("please provide Address Line 1")
+               return
+            }
+            if(LocalityCityTownVillage==='')
+            {
+               alert("please provide Locality")
+               return
+            }
+            if(State==='')
+            {
+               alert("please provide name of the State")
+               return
+            }
+            if(District==='')
+            {
+               alert("please provide name of the district")
+               return
+            }
+            if(Country==='')
+            {
+               alert("please provide name of the country")
+               return
+            }
+            if(UrbanLocalBody==='')
+            {
+               alert("please provide name of the Urban Local Body")
+               return
+            }
+            if (PinCode === "" || isNaN(PinCode) || PinCode.length !== 6) {
+                alert("Please provide a valid Pincode (6 digits).");
+                return;
+            }
+            if (TotalAreaInAcre === "" || isNaN(TotalAreaInAcre)) {
+                alert("Please provide total area in acre.");
+                return;
+            }
+            if (TotalConstructedArea === "" || isNaN(TotalConstructedArea)) {
+                alert("Please provide total constructed area.");
+                return;
+            }
+            if(Website==='')
+            {
+               alert("please provide website")
+               return
+            }
+            const formData=new FormData(this)
+            const data = Object.fromEntries(formData.entries())
+            console.log(data)
+            fetch('/v1/form1/address',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(data),
+            }).then(response=>response.json())
+            .then(data=>{
+                console.log("Success:",data)
+                alert("form is submitted")
+            })
+            .catch(error=>{
+                console.error("Error:",error)
+            })
+        })
+</script>
 </html>

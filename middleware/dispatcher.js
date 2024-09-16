@@ -30,10 +30,9 @@ const dispatcher = async (req, res, next, func, resource, perm) => {
     if (perm) {
       let enforcer = await casbinEnforcer;
       const checkPerm = await enforcer.enforce(
-        user.userId,
+        user.role,
         resource,
         perm,
-        user.role
       );
 
       if (!checkPerm) throw new ErrorHandler(UNAUTHORIZED, "Unauthorized");

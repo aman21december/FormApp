@@ -29,6 +29,8 @@ module.exports = {
   },
   RESOURCES: {
     TEMP: "TEMP_RESOURCE",
+    Form: "FORM_RESOURCE",
+    DEOPANEL: "DEO_PANEL"
   },
   PERMS: {
     ADD: "ADD",
@@ -38,4 +40,8 @@ module.exports = {
     EXPORT: "EXPORT",
     PROCESS: "PROCESS",
   },
+  ROLES:{
+    COLLEGE:"COLLEGE",
+    DEO:"DEO"
+  }
 };

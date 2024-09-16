@@ -1,7 +1,16 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const { User } = require('./User');
 
 const PAFD = sequelize.define('ProgrammeAndFacultyDetails', {
+    collegeId:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        references:{
+            model:User,
+            key:"id"
+        }
+    },
     SrNo: {
         type: DataTypes.STRING,
         allowNull: false
@@ -11,6 +20,10 @@ const PAFD = sequelize.define('ProgrammeAndFacultyDetails', {
         allowNull: false
     },
     UgPg: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    EnrolledStudents: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -51,9 +64,6 @@ const PAFD = sequelize.define('ProgrammeAndFacultyDetails', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 });
-sequelize.sync().then(() => {
-    console.log('Programme and Faculty Details table created successfully!');
- }).catch((error) => {
-    console.error('Unable to create table : ', error);
- });
+User.hasMany(PAFD, { foreignKey: 'collegeId' });
+PAFD.belongsTo(User, { foreignKey: 'collegeId' });
 module.exports = PAFD;

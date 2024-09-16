@@ -1,7 +1,16 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const { User } = require('./User');
 
 const iC = sequelize.define('infraConstruction', {
+    collegeId:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        references:{
+            model:User,
+            key:"id"
+        }
+    },
     SNO: {
         type: DataTypes.STRING,
         allowNull: false
@@ -39,9 +48,7 @@ const iC = sequelize.define('infraConstruction', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 });
-sequelize.sync().then(() => {
-    console.log('Infra Construction table created successfully!');
- }).catch((error) => {
-    console.error('Unable to create table : ', error);
- });
+User.hasMany(iC, { foreignKey: 'collegeId' });
+iC.belongsTo(User, { foreignKey: 'collegeId' });
+
 module.exports = iC;

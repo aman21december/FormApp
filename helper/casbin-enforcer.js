@@ -16,5 +16,8 @@ module.exports = (async () => {
     adapter
   );
 
+  await enforcer.addPolicy(ROLES.COLLEGE,RESOURCES.Form,PERMS.EDIT)
+  await enforcer.addPolicy(ROLES.DEO,RESOURCES.DEOPANEL,PERMS.VIEW)
+
   return enforcer;
 })();

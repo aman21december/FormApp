@@ -6,7 +6,7 @@ class Form3{
          
          for(let i=0;i<arr.length;i++)
          {
-             await LDOCW.create(arr[i])
+             await LDOCW.create({...arr[i],collegeId:req.user.id})
          } 
     }
 }

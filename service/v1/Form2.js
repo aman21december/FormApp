@@ -6,7 +6,8 @@ class Form2{
          console.log(arr)
          for(let i=0;i<arr.length;i++)
          {
-             await PAFD.create(arr[i])
+            console.log(req.user.id)
+             await PAFD.create({...arr[i],collegeId:req.user.id})
          } 
     }
 }

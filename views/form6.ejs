@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+    <div style="text-align: right;">
+        <form action="/v1/auth/logout">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+    
     <H3>New Proposal</H3>
     <h4>Infra Construction</h4>
     <h5>Institution proposed Infrastructure construction work list dowm in priority:</h5>
@@ -25,13 +31,13 @@
         </thead>
         <tbody id="tbody1">
             <tr>
-                <td><input type="text" name="SNO"></td>
+                <td><input type="number" name="SNO"></td>
                 <td><input type="text" name="DescriptionOfInfrastructure"></td>
                 <td><input type="text" name="PurposeOfInfrastructure"></td>
-                <td><input type="text" name="ProposedAreaSqFeet"></td>
-                <td><input type="text" name="TotalCostPerSqFeet"></td>
-                <td><input type="text" name="TotalCost"></td>
-                <td><input type="text" name="TotalAmountInInternalSource"></td>
+                <td><input type="number" name="ProposedAreaSqFeet"></td>
+                <td><input type="number" name="TotalCostPerSqFeet"></td>
+                <td><input type="number" name="TotalCost"></td>
+                <td><input type="number" name="TotalAmountInInternalSource"></td>
                <td><input type="text" name="JustificationWhyItCantBeDoneByInternalSource"></td>
             </tr>
         </tbody>
@@ -58,13 +64,13 @@
         </thead>
         <tbody id="tbody2">
             <tr>
-                <td><input type="text" name="SNO"></td>
+                <td><input type="number" name="SNO"></td>
                 <td><input type="text" name="DescriptionOfInfrastructure"></td>
                 <td><input type="text" name="DetailOfRenovationUpgradationProposed"></td>
-                <td><input type="text" name="ProposedAreaSqFeet"></td>
-                <td><input type="text" name="TotalCostPerSqFeet"></td>
-                <td><input type="text" name="TotalCost"></td>
-                <td><input type="text" name="TotalAmountInInternalSource"></td>
+                <td><input type="number" name="ProposedAreaSqFeet"></td>
+                <td><input type="number" name="TotalCostPerSqFeet"></td>
+                <td><input type="number" name="TotalCost"></td>
+                <td><input type="number" name="TotalAmountInInternalSource"></td>
                <td><input type="text" name="JustificationWhyItCantBeDoneByInternalSource"></td>
             </tr>
         </tbody>
@@ -72,6 +78,7 @@
     <button type="button" onclick="AddRow2()">AddRow</button>
     <button type="button" onclick="SubmitForm2()">Submit</button>
 </form>
+<a href="http://localhost:5000/v1/form5" type="button">previous</a>
 <script>
     function AddRow1(){
        let tbody=document.getElementById("tbody1")
@@ -84,13 +91,13 @@
             const cell6 = row.insertCell(5);
             const cell7 = row.insertCell(6);
             const cell8 = row.insertCell(7); 
-            cell1.innerHTML='<input type="text" name="SNO">'
+            cell1.innerHTML='<input type="number" name="SNO">'
             cell2.innerHTML='<input type="text" name="DescriptionOfInfrastructure">'
             cell3.innerHTML='<input type="text" name="PurposeOfInfrastructure">'
-            cell4.innerHTML='<input type="text" name="ProposedAreaSqFeet">'
-            cell5.innerHTML='<input type="text" name="TotalCostPerSqFeet">'
-            cell6.innerHTML='<input type="text" name="TotalCost">'
-            cell7.innerHTML='<input type="text" name="TotalAmountInInternalSource">'
+            cell4.innerHTML='<input type="number" name="ProposedAreaSqFeet">'
+            cell5.innerHTML='<input type="number" name="TotalCostPerSqFeet">'
+            cell6.innerHTML='<input type="number" name="TotalCost">'
+            cell7.innerHTML='<input type="number" name="TotalAmountInInternalSource">'
             cell8.innerHTML='<input type="text" name="JustificationWhyItCantBeDoneByInternalSource">'
     }
     function AddRow2(){
@@ -104,18 +111,49 @@
             const cell6 = row.insertCell(5);
             const cell7 = row.insertCell(6);
             const cell8 = row.insertCell(7); 
-            cell1.innerHTML='<input type="text" name="SNO">'
+            cell1.innerHTML='<input type="number" name="SNO">'
             cell2.innerHTML='<input type="text" name="DescriptionOfInfrastructure">'
             cell3.innerHTML='<input type="text" name="DetailOfRenovationUpgradationProposed">'
-            cell4.innerHTML='<input type="text" name="ProposedAreaSqFeet">'
-            cell5.innerHTML='<input type="text" name="TotalCostPerSqFeet">'
-            cell6.innerHTML='<input type="text" name="TotalCost">'
-            cell7.innerHTML='<input type="text" name="TotalAmountInInternalSource">'
+            cell4.innerHTML='<input type="number" name="ProposedAreaSqFeet">'
+            cell5.innerHTML='<input type="number" name="TotalCostPerSqFeet">'
+            cell6.innerHTML='<input type="number" name="TotalCost">'
+            cell7.innerHTML='<input type="number" name="TotalAmountInInternalSource">'
             cell8.innerHTML='<input type="text" name="JustificationWhyItCantBeDoneByInternalSource">'
     }
     function SubmitForm1(){
         const data = [];
         const rows = document.querySelectorAll("#tbody1 tr");
+        let isValid=true
+        let errorMessage="";
+        rows.forEach((row)=>{
+            const inputs = row.querySelectorAll("input, select, textarea");
+            inputs.forEach((input)=>{
+                const value = input.value.trim();
+                if (input.name === "DescriptionOfInfrastructure"  || input.name==='PurposeOfInfrastructure' || input.name==="JustificationWhyItCantBeDoneByInternalSource") {
+                    if (value === "") {
+                        isValid = false;
+                        errorMessage += `${input.name} is required.\n`;
+                        input.style.borderColor = "red";
+                    } else {
+                        input.style.borderColor = "";
+                    }
+                }
+                if (input.name === "SNO" || input.name === "ProposedAreaSqFeet" || input.name === "TotalCostPerSqFeet" || input.name === "TotalCost" || input.name === "TotalAmountInInternalSource" ) {
+                    if (isNaN(value) || value === "") {
+                        isValid = false;
+                        errorMessage += `${input.name} must be a number.\n`;
+                        input.style.borderColor = "red";
+                    } else {
+                        input.style.borderColor = "";
+                    }
+                }
+
+            })
+        })
+        if (!isValid) {
+            alert(errorMessage);
+            return;
+        }
             rows.forEach((row) => {
                 const inputs = row.querySelectorAll("input, select, textarea");
                 const rowData = {};
@@ -123,8 +161,6 @@
                 inputs.forEach(input => {
                     rowData[input.name] = input.value;
                 });
-
-            
                 data.push(rowData);
             });
             console.log(data)
@@ -138,14 +174,47 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                alert("form is submitted")
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
     }
     function SubmitForm2(){
-        const data = [];
+        let isValid=true
+        let errorMessage="";
         const rows = document.querySelectorAll("#tbody2 tr");
+        rows.forEach((row)=>{
+            const inputs = row.querySelectorAll("input, select, textarea");
+            inputs.forEach((input)=>{
+                const value = input.value.trim();
+                if (input.name === "DescriptionOfInfrastructure"  || input.name==='DetailOfRenovationUpgradationProposed' || input.name==="JustificationWhyItCantBeDoneByInternalSource") {
+                    if (value === "") {
+                        isValid = false;
+                        errorMessage += `${input.name} is required.\n`;
+                        input.style.borderColor = "red";
+                    } else {
+                        input.style.borderColor = "";
+                    }
+                }
+                if (input.name === "SNO" || input.name === "ProposedAreaSqFeet" || input.name === "TotalCostPerSqFeet" || input.name === "TotalCost" || input.name === "TotalAmountInInternalSource" ) {
+                    if (isNaN(value) || value === "") {
+                        isValid = false;
+                        errorMessage += `${input.name} must be a number.\n`;
+                        input.style.borderColor = "red";
+                    } else {
+                        input.style.borderColor = "";
+                    }
+                }
+
+            })
+        })
+        if (!isValid) {
+            alert(errorMessage);
+            return;
+        }
+
+        const data = [];
             rows.forEach((row) => {
                 const inputs = row.querySelectorAll("input, select, textarea");
                 const rowData = {};
@@ -168,6 +237,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                alert("form is submitted")
             })
             .catch((error) => {
                 console.error('Error:', error);

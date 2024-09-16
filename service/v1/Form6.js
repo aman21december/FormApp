@@ -6,14 +6,14 @@ class Form6{
         const arr=req.body
         for(let i=0;i<arr.length;i++)
         {
-            await iC.create(arr[i])
+            await iC.create({...arr[i],collegeId:req.user.id})
         }
     }
     async postInfraRenovation(req,res,next){
         const arr=req.body
         for(let i=0;i<arr.length;i++)
         {
-            await iR.create(arr[i])
+            await iR.create({...arr[i],collegeId:req.user.id})
         }
     }
 }

@@ -1,7 +1,16 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const { User } = require('./User');
 
 const iS = sequelize.define('infraStatus', {
+    collegeId:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        references:{
+            model:User,
+            key:"id"
+        }
+    },
     AuditoriumAvailable: {
         type: DataTypes.TEXT,
         allowNull: false
@@ -185,6 +194,10 @@ const iS = sequelize.define('infraStatus', {
     ComputerLabRenovationOrConstruction: {
         type: DataTypes.TEXT,
         allowNull: false
+    },
+    NoOfComputerLabAvailable:{
+        type: DataTypes.TEXT,
+        allowNull:false
     },
     NoOfComputerLabSpecifyTheNumber: {
         type: DataTypes.TEXT,
@@ -697,6 +710,10 @@ const iS = sequelize.define('infraStatus', {
         type: DataTypes.TEXT,
         allowNull: false
     },
+    ComputerCentreFunctionalOrDysfunctional: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     ComputerCentreRenovationOrConstruction: {
         type: DataTypes.TEXT,
         allowNull: false
@@ -998,6 +1015,8 @@ const iS = sequelize.define('infraStatus', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 });
+User.hasMany(iS, { foreignKey: 'collegeId' });
+iS.belongsTo(User, { foreignKey: 'collegeId' });
 sequelize.sync().then(() => {
     console.log('Infra Status table created successfully!');
  }).catch((error) => {

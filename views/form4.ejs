@@ -6,6 +6,12 @@
     <title>Form 4</title>
 </head>
 <body>
+    <div style="text-align: right;">
+        <form action="/v1/auth/logout">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+    
 <h3>Financial Information</h3>
 <form id="financialForm">
     <table border="1" cellspacing="0" cellpadding="0.5">
@@ -33,48 +39,67 @@
             <tr>
                 <td>(i)</td>
                 <td>Tuition Fee and other fee</td>
-                <td><input type="text" name="tuition_fee"></td>
-                <td><input type="text" name="tuition_expenditure"></td>
-                <td><input type="text" name="tuition_expenditure_amount"></td>
+                <td><input type="number" name="tuition_fee"></td>
+                <td><input type="number" name="tuition_expenditure"></td>
+                <td><input type="number" name="tuition_expenditure_amount"></td>
             </tr>
             <tr>
                 <td>(ii)</td>
                 <td>Examination Fee</td>
-                <td><input type="text" name="exam_fee"></td>
-                <td><input type="text" name="exam_expenditure"></td>
-                <td><input type="text" name="exam_expenditure_amount"></td>
+                <td><input type="number" name="exam_fee"></td>
+                <td><input type="number" name="exam_expenditure"></td>
+                <td><input type="number" name="exam_expenditure_amount"></td>
             </tr>
             <tr>
-                <td>(ii)</td>
+                <td>(iii)</td>
                 <td>Donations</td>
-                <td><input type="text" name="donations"></td>
-                <td><input type="text" name="donations_expenditure"></td>
-                <td><input type="text" name="donations_expenditure_amount"></td>
+                <td><input type="number" name="donations"></td>
+                <td><input type="number" name="donations_expenditure"></td>
+                <td><input type="number" name="donations_expenditure_amount"></td>
             </tr>
             <tr>
                 <td>2</td>
                 <td>Deveopment Grant received from state government</td>
-                <td><input type="text" name="dev_grant"></td>
-                <td><input type="text" name="dev_grant_expenditure"></td>
-                <td><input type="text" name="dev_grant_expenditure_amount"></td>
+                <td><input type="number" name="dev_grant"></td>
+                <td><input type="number" name="dev_grant_expenditure"></td>
+                <td><input type="number" name="dev_grant_expenditure_amount"></td>
             </tr>
             <tr>
                 <td>3</td>
                 <td>Grant received from university (In case of college)</td>
-                <td><input type="text" name="uni_grant"></td>
-                <td><input type="text" name="uni_grant_expenditure"></td>
-                <td><input type="text" name="uni_grant_expenditure_amount"></td>
+                <td><input type="number" name="uni_grant"></td>
+                <td><input type="number" name="uni_grant_expenditure"></td>
+                <td><input type="number" name="uni_grant_expenditure_amount"></td>
             </tr>
         </tbody>
     </table>
     <button type="submit">Submit</button>
 </form>
+<a href="http://localhost:5000/v1/form3" type="button">previous</a>
+<a href="http://localhost:5000/v1/form5" type="button">next</a>
 <script>
      document.getElementById('financialForm').addEventListener('submit', function(event) {
             event.preventDefault();
+
             const formData = new FormData(this);
             
             const data = Object.fromEntries(formData.entries());
+            let isValid = true;
+        let errorMessage = '';
+
+        for (let [key, value] of Object.entries(data)) {
+            const amount = parseFloat(value);
+            if (isNaN(amount) || amount < 0) {
+                isValid = false;
+                errorMessage += `${key.replace(/_/g, ' ')} must be a non-negative number.\n`;
+            }
+        }
+
+        if (!isValid) {
+            alert(errorMessage);
+            return;
+        }
+
             console.log(data)
             fetch('/v1/form4', {
                 method: 'POST',
@@ -85,11 +110,12 @@
             }).then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                alert("form is submitted")
             })
             .catch((error) => {
                 console.error('Error:', error);
             });;
         });
-</script>
+</script>   
 </body>
 </html>

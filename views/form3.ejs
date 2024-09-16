@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+    <div style="text-align: right;">
+        <form action="/v1/auth/logout">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+    
     <h3>Legacy data of civil work</h3>
     <h4>Status of earlier Approval details under various Civil work</h4>
 <form id="tabularForm">
@@ -59,13 +65,13 @@
         </thead>
         <tbody id="tbody">
             <tr>
-                <td><input type="text" name="SNO"></td>
+                <td><input type="number" name="SNO"></td>
                 <td><input type="text" name="NameOfSchemes"></td>
-                <td><input type="text" name="SchemeApprovalFinancialyear"></td>
-                <td><input type="text" name="TotalApprovedAmount"></td>
-                <td><input type="text" name="FinancialYearAmountReleased"></td>
-                <td><input type="text" name="TotalExpemditureAmount"></td>
-                <td><input type="text" name="YearOfStartOfWork"></td>
+                <td><input type="number" name="SchemeApprovalFinancialyear"></td>
+                <td><input type="number" name="TotalApprovedAmount"></td>
+                <td><input type="number" name="FinancialYearAmountReleased"></td>
+                <td><input type="number" name="TotalExpemditureAmount"></td>
+                <td><input type="number" name="YearOfStartOfWork"></td>
                 <td><Select name="HandOverTaken"><option value="Yes">yes</option><option value="No">no</option></Select></td>
                 <td><Select name="Inaugurated"><option value="Yes">yes</option><option value="No">no</option></Select></td>
                <td><input type="text" name="Below25percentwork"></td>
@@ -79,6 +85,8 @@
     <button type="button" onclick="AddRow()">Add Row</button>
     <button type="button" onclick="submitForm()">Submit</button>
 </form>
+<a href="http://localhost:5000/v1/form2" type="button">previous</a>
+<a href="http://localhost:5000/v1/form4" type="button">next</a>
        <script>
         function AddRow(){
             let tbody=document.getElementById("tbody")
@@ -96,13 +104,13 @@
             const cell11= row.insertCell(10);
             const cell12= row.insertCell(11);
             const cell13= row.insertCell(12);
-            cell1.innerHTML = '<input type="text" name="SNO">';
+            cell1.innerHTML = '<input type="number" name="SNO">';
             cell2.innerHTML = '<input type="text" name="NameOfSchemes">';
-            cell3.innerHTML = '<input type="text" name="SchemeApprovalFinancialyear">';
-            cell4.innerHTML = '<input type="text" name="TotalApprovedAmount">';
-            cell5.innerHTML = '<input type="text" name="FinancialYearAmountReleased">';
-            cell6.innerHTML = '<input type="text" name="TotalExpemditureAmount">';
-            cell7.innerHTML = '<input type="text" name="YearOfStartOfWork">';
+            cell3.innerHTML = '<input type="number" name="SchemeApprovalFinancialyear">';
+            cell4.innerHTML = '<input type="number" name="TotalApprovedAmount">';
+            cell5.innerHTML = '<input type="number" name="FinancialYearAmountReleased">';
+            cell6.innerHTML = '<input type="number" name="TotalExpemditureAmount">';
+            cell7.innerHTML = '<input type="number" name="YearOfStartOfWork">';
             cell8.innerHTML = '<Select name="HandOverTaken"><option value="Yes">yes</option><option value="No">no</option></Select>';
             cell9.innerHTML = '<Select name="Inaugurated"><option value="Yes">yes</option><option value="No">no</option></Select>';
             cell10.innerHTML = '<input type="text" name="Below25%work">';
@@ -114,9 +122,51 @@
         function submitForm() {
             const data = [];
 
-        
+            let isValid=true;
+            let errorMessage=""
+
             const rows = document.querySelectorAll("#tbody tr");
-            
+            rows.forEach((row)=>{
+                const inputs = row.querySelectorAll("input, select, textarea");
+                inputs.forEach(input=>{
+                    const value=input.value.trim();
+
+                    if (input.name === "SNO" || input.name === "NameOfSchemes" || input.name==="NotStarted" || input.name === "Below25%work" || input.name === "Between25%to50%work" || input.name === "Above50%work"
+                    ) {
+                    if (value === "") {
+                        isValid = false;
+                        errorMessage += `${input.name} is required.\n`;
+                        input.style.borderColor = "red";
+                    } else {
+                        input.style.borderColor = "";
+                    }
+                }
+                if (input.name === "SNO" || input.name === "SchemeApprovalFinancialyear" || input.name === "TotalApprovedAmount" || input.name === "FinancialYearAmountReleased" || input.name === "TotalExpemditureAmount" || input.name === "YearOfStartOfWork"
+                 ) {
+                    if (isNaN(value) || value === "") {
+                        isValid = false;
+                        errorMessage += `${input.name} must be a number.\n`;
+                        input.style.borderColor = "red";
+                    } else {
+                        input.style.borderColor = "";
+                
+                }}
+
+                if (input.name === "SchemeApprovalFinancialyear") {
+                   if (value.length !== 4) {
+                isValid = false;  
+                errorMessage += "Scheme approval financial year should be of length 4.\n";
+                input.style.borderColor = "red";
+                } else {
+                input.style.borderColor = "";
+                }
+        }
+                })
+            })
+            if (!isValid) {
+            alert(errorMessage);
+            return;
+        }
             rows.forEach((row) => {
                 const inputs = row.querySelectorAll("input, select, textarea");
                 const rowData = {};
@@ -139,6 +189,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                alert("form is submitted")
             })
             .catch((error) => {
                 console.error('Error:', error);
