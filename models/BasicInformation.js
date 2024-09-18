@@ -13,27 +13,65 @@ const BasicInformation = sequelize.define('BasicInformation', {
     },
     AISHECODE: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: 'AISHE Code cannot be empty'
+            },
+        },
     },
     NameOfInstitution: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            notEmpty:{
+                msg:"Name of Institution cannot be empty"
+            }
+        }
     },
     YearOfEstablishment: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            isInt:{
+                msg:"Year of Establishment must be an Integer"
+            },
+            min: {
+                args: 1800,
+                msg: 'Year of Establishment must be no earlier than 1800'
+            },
+            max: {
+                args: new Date().getFullYear(),
+                msg: `Year of Establishment cannot be in the future`
+            }
+        }
     },
     NameOfTheUniversity: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: 'University name cannot be empty'
+            }
+        }
     },
     gender: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: 'Gender cannot be empty'
+            }
+        }
     },
     NAACStatus:{
         type: DataTypes.STRING,
         allowNull:false,
+        validate: {
+            notEmpty: {
+                msg: 'NAAC Status cannot be empty'
+            }
+        }
     },
     GradingDetails:{
         type:DataTypes.STRING,

@@ -1,4 +1,4 @@
-const iC = require("../../models/infraConstruction")
+const iC = require("../../models/InfraConstruction")
 const iR = require("../../models/InfraRenovation")
 
 class Form6{
